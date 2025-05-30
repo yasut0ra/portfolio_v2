@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import BlogPage from './pages/BlogPage';
+import ResearchPage from './pages/ResearchPage';
 import Footer from './components/Footer';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/project/:id" element={<ProjectDetailPage />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/research" element={<ResearchPage />} />
         </Routes>
         <Footer />
       </div>
