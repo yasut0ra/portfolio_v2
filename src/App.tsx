@@ -38,15 +38,19 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
-        <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/project/:id" element={<ProjectDetailPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/research" element={<ResearchPage />} />
-        </Routes>
-        <Footer />
+        <div className="fixed inset-0 bg-pattern pointer-events-none"></div>
+        <div className="fixed inset-0 bg-grid pointer-events-none"></div>
+        <div className="relative">
+          <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/project/:id" element={<ProjectDetailPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/research" element={<ResearchPage />} />
+          </Routes>
+          <Footer />
+        </div>
       </div>
     </Router>
   );
