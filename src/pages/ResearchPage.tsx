@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookOpen, Users, Calendar, FileText, ExternalLink, Award } from 'lucide-react';
+import { BookOpen, Users, Calendar, FileText, ExternalLink, Award, Play } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface Publication {
   id: number;
@@ -73,6 +74,29 @@ const ResearchPage: React.FC = () => {
             Exploring the frontiers of Natural Language Processing and Machine Learning
           </p>
         </div>
+
+        {/* Interactive Demos Section */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Interactive Demos
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Link
+              to="/bandit-playground"
+              className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="flex items-center mb-4">
+                <Play className="h-8 w-8 text-blue-500 mr-3" />
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Multi-Armed Bandit Playground
+                </h3>
+              </div>
+              <p className="text-gray-700 dark:text-gray-300">
+                Explore and experiment with different bandit algorithms in this interactive simulation environment.
+              </p>
+            </Link>
+          </div>
+        </section>
 
         {/* Research Interests */}
         <section className="mb-16">

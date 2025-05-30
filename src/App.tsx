@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import BlogPage from './pages/BlogPage';
 import ResearchPage from './pages/ResearchPage';
+import BanditPlayground from './pages/BanditPlayground';
 import Footer from './components/Footer';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
             <Route path="/project/:id" element={<ProjectDetailPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/research" element={<ResearchPage />} />
+            <Route path="/bandit-playground" element={<BanditPlayground />} />
           </Routes>
           <Footer />
         </div>
