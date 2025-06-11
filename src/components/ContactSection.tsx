@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, X } from 'lucide-react';
+import { Mail, MapPin, Send, Phone } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -35,20 +35,20 @@ const ContactSection: React.FC = () => {
   const contactInfo = [
     {
       icon: <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
-      title: 'Email',
+      title: 'メールアドレス',
       content: 'yastar.tkm83@gmail.com',
       link: 'mailto:yastar.tkm83@gmail.com'
     },
     {
-      icon: <X className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
-      title: 'X',
-      content: '@YaSut0ra94970',
-      link: 'https://x.com/YaSut0ra94970'
+      icon: <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
+      title: '電話番号',
+      content: '非公開',
+      link: '#'
     },
     {
       icon: <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
-      title: 'Location',
-      content: 'Hokkaido, Japan',
+      title: '住所',
+      content: '北海道, 日本',
       link: '#'
     }
   ];
