@@ -20,7 +20,7 @@ const ProjectsSection: React.FC = () => {
       id: 1,
       title: 'Nomitto!（のみっと！）',
       description: '「のみっと！」は、友達と遊びたいけど誘うのが面倒な時に、飲み会や食事のイベントを自動提案するWebアプリです。ユーザーが設定した条件に合うイベントを自動で提案します。',
-      image: '/images/projects/nomitto.jpg',
+      image: '/images/projects/nomitto.png',
       tags: ['React','JavaScript', 'Node.js', 'Firebase'],
       liveUrl: 'https://nomitto-app.vercel.app/',
       githubUrl: 'https://github.com/Team-Futsukayoi/Nomikai-Setting-App'
