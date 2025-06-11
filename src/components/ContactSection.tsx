@@ -36,19 +36,13 @@ const ContactSection: React.FC = () => {
     {
       icon: <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
       title: 'Email',
-      content: 'your.email@example.com',
-      link: 'mailto:your.email@example.com'
-    },
-    {
-      icon: <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
-      title: 'Phone',
-      content: '+1 (123) 456-7890',
-      link: 'tel:+11234567890'
+      content: 'yastar.tkm83@gmail.com',
+      link: 'mailto:yastar.tkm83@gmail.com'
     },
     {
       icon: <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
       title: 'Location',
-      content: 'Your City, Country',
+      content: 'Hokkaido, Japan',
       link: '#'
     }
   ];
