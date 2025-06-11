@@ -43,7 +43,7 @@ const HeroSection: React.FC = () => {
           <div className="max-w-3xl mx-auto mb-12">
             <p className="text-gray-600 dark:text-gray-400 text-lg sm:text-xl leading-relaxed">
               現実の課題を解決する、<br className="sm:hidden" />
-              <span className="font-semibold text-gray-800 dark:text-gray-200">美しく・機能的で・ユーザーフレンドリー</span>なアプリケーションを開発することに情熱を注いでいます。<br />
+              <span className="font-semibold text-gray-800 dark:text-gray-200">美しく・機能的で・ユーザーフレンドリー</span>な<br/>アプリケーションを開発することに情熱を注いでいます。<br />
               現在は <span className="font-semibold text-blue-600 dark:text-blue-400">推薦システム × バンディットアルゴリズム</span> の研究に取り組んでおり、<br />
               将来は <span className="font-semibold text-purple-600 dark:text-purple-400">AI開発のリーダー</span> を目指しています。
             </p>
