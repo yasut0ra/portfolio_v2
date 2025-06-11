@@ -27,7 +27,7 @@ const ResearchPage: React.FC = () => {
   const publications: Publication[] = [
     {
       id: 1,
-      title: "推薦システムにおけるバンディットアルゴリズムの最適化手法",
+      title: "推薦システムにおけるバンディットアルゴリズムの最適化手法（仮）",
       authors: ["Yasut0ra", "指導教員"],
       conference: "学部研究",
       year: "2025",
