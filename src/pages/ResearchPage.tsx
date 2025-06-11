@@ -112,7 +112,7 @@ const ResearchPage: React.FC = () => {
             { label: '研究分野', value: '3+', icon: <Lightbulb className="h-6 w-6" />, color: 'from-blue-500 to-cyan-500' },
             { label: '進行中プロジェクト', value: '2', icon: <TrendingUp className="h-6 w-6" />, color: 'from-purple-500 to-pink-500' },
             { label: '実装アルゴリズム', value: '5+', icon: <Database className="h-6 w-6" />, color: 'from-emerald-500 to-teal-500' },
-            { label: '研究期間', value: '1年+', icon: <Calendar className="h-6 w-6" />, color: 'from-orange-500 to-red-500' }
+            { label: '研究期間', value: '半年', icon: <Calendar className="h-6 w-6" />, color: 'from-orange-500 to-red-500' }
           ].map((stat, index) => (
             <div key={index} className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 dark:border-gray-700/50 text-center group hover:shadow-2xl transition-all duration-300">
               <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center text-white mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
