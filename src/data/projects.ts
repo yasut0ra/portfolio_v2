@@ -56,7 +56,7 @@ export const projects: Project[] = [
       'REST API - データ通信'
     ],
     screenshots: [
-      '/images/projects/nomitto.png',
+      '/images/projects/nomitto.png'
       // '/images/projects/nomitto.png',
       // '/images/projects/nomitto.png'
     ],
@@ -110,7 +110,7 @@ export const projects: Project[] = [
       'Netlify - 静的サイトホスティング'
     ],
     screenshots: [
-      '/images/projects/minitask.png',
+      '/images/projects/minitask.png'
       // '/images/projects/minitask.png',
       // '/images/projects/minitask.png'
     ],
@@ -166,7 +166,7 @@ export const projects: Project[] = [
       'WebSocket - リアルタイム通信'
     ],
     screenshots: [
-      '/images/projects/ai-stream.png',
+      '/images/projects/ai-stream.png'
       // '/images/projects/ai-stream.png',
       // '/images/projects/ai-stream.png'
     ],
@@ -220,7 +220,7 @@ export const projects: Project[] = [
       'GitHub Pages - 静的サイトホスティング'
     ],
     screenshots: [
-      '/images/projects/portfolio.png',
+      '/images/projects/portfolio.png'
       // '/images/projects/portfolio.png',
       // '/images/projects/portfolio.png'
     ],
@@ -275,9 +275,10 @@ export const projects: Project[] = [
       'scikit-learn - 機械学習ライブラリ'
     ],
     screenshots: [
-      '/images/projects/recomate.png',
+      '/images/projects/recomate.png'
       // '/images/projects/recomate.png',
-      // '/images/projects/recomate.png'    ],
+      // '/images/projects/recomate.png'
+    ],
     challenges: [
       'ElectronとPythonの統合',
       'ローカルでのAI処理最適化',
@@ -328,7 +329,7 @@ export const projects: Project[] = [
       'Row Level Security - データセキュリティ'
     ],
     screenshots: [
-      '/images/projects/muu.png',
+      '/images/projects/muu.png'
       // '/images/projects/muu.png',
       // '/images/projects/muu.png'
     ],
