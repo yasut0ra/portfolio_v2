@@ -155,8 +155,7 @@ const ContactSection: React.FC = () => {
             </div>
             
             <div className="hidden lg:block bg-gray-300 dark:bg-gray-600">
-              {/* Google Maps or other map embed would go here */}
-              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}></div>
+              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/contact-bg.jpg')" }}></div>
             </div>
           </div>
         </div>
