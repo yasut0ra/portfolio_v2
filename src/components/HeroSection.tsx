@@ -13,15 +13,15 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Enhanced gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/90 via-white to-purple-50/90 dark:from-gray-900/95 dark:via-gray-800/95 dark:to-blue-900/95 backdrop-blur-sm z-0"></div>
       
       {/* Enhanced animated background elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-200/60 to-cyan-200/60 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob"></div>
-      <div className="absolute top-40 right-10 w-80 h-80 bg-gradient-to-r from-purple-200/60 to-pink-200/60 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-2000"></div>
-      <div className="absolute -bottom-8 left-20 w-80 h-80 bg-gradient-to-r from-pink-200/60 to-rose-200/60 dark:from-pink-900/30 dark:to-rose-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
-      <div className="absolute bottom-40 right-20 w-72 h-72 bg-gradient-to-r from-teal-200/60 to-emerald-200/60 dark:from-teal-900/30 dark:to-emerald-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-6000"></div>
+      <div className="absolute top-32 left-10 w-72 h-72 bg-gradient-to-r from-blue-200/60 to-cyan-200/60 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob"></div>
+      <div className="absolute top-52 right-10 w-80 h-80 bg-gradient-to-r from-purple-200/60 to-pink-200/60 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-8 left-20 w-80 h-80 bg-gradient-to-r from-pink-200/60 to-rose-200/60 dark:from-pink-900/30 dark:to-rose-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
+      <div className="absolute bottom-52 right-20 w-72 h-72 bg-gradient-to-r from-teal-200/60 to-emerald-200/60 dark:from-teal-900/30 dark:to-emerald-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-6000"></div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center">
