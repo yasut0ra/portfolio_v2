@@ -47,7 +47,7 @@ const ProjectsSection: React.FC = () => {
       id: 4,
       title: 'Portfolio Website',
       description: 'このポートフォリオサイトです。',
-      image: '/images/projects/portfolio.jpg',
+      image: '/images/projects/portfolio.png',
       tags: ['React', 'Tailwind'],
       liveUrl: 'https://yasut0ra.github.io/portfolio_v2/',
       githubUrl: 'https://github.com/yasut0ra/portfolio_v2'
