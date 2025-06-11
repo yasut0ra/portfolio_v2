@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Github, Calendar, Star, Eye } from 'lucide-react';
+import { ExternalLink, Github, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Project {
@@ -11,10 +11,6 @@ interface Project {
   liveUrl: string;
   githubUrl: string;
   featured?: boolean;
-  stats?: {
-    stars?: number;
-    views?: number;
-  };
 }
 
 const ProjectsSection: React.FC = () => {
@@ -29,8 +25,7 @@ const ProjectsSection: React.FC = () => {
       tags: ['React','JavaScript', 'Node.js', 'Firebase'],
       liveUrl: 'https://nomitto-app.vercel.app/',
       githubUrl: 'https://github.com/Team-Futsukayoi/Nomikai-Setting-App',
-      featured: true,
-      stats: { stars: 12, views: 245 }
+      featured: true
     },
     {
       id: 2,
@@ -39,8 +34,7 @@ const ProjectsSection: React.FC = () => {
       image: '/images/projects/minitask.png',
       tags: ['React', 'TypeScript', 'MongoDB'],
       liveUrl: 'https://lambent-lolly-5e5cdb.netlify.app',
-      githubUrl: 'https://github.com/yasut0ra/mini-task',
-      stats: { stars: 8, views: 156 }
+      githubUrl: 'https://github.com/yasut0ra/mini-task'
     },
     {
       id: 3,
@@ -50,8 +44,7 @@ const ProjectsSection: React.FC = () => {
       tags: ['React', 'TypeScript', 'OpenAI', 'Next.js','FastAPI'],
       liveUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2',
       githubUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2',
-      featured: true,
-      stats: { stars: 15, views: 320 }
+      featured: true
     },
     {
       id: 4,
@@ -60,8 +53,7 @@ const ProjectsSection: React.FC = () => {
       image: '/images/projects/portfolio.png',
       tags: ['React', 'Tailwind'],
       liveUrl: 'https://yasut0ra.github.io/portfolio_v2/',
-      githubUrl: 'https://github.com/yasut0ra/portfolio_v2',
-      stats: { stars: 5, views: 89 }
+      githubUrl: 'https://github.com/yasut0ra/portfolio_v2'
     },
     {
       id: 5,
@@ -71,8 +63,7 @@ const ProjectsSection: React.FC = () => {
       tags: ['React', 'TypeScript', 'Python', 'Electron','OpenAI'],
       liveUrl: 'https://recomate-landing.netlify.app/',
       githubUrl: 'https://github.com/yasut0ra/recomate',
-      featured: true,
-      stats: { stars: 18, views: 412 }
+      featured: true
     },
     {
       id: 6,
@@ -81,8 +72,7 @@ const ProjectsSection: React.FC = () => {
       image: '/images/projects/muu.png',
       tags: ['ReactNative', 'TypeScript', 'Expo', 'Supabase'],
       liveUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns',
-      githubUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns',
-      stats: { stars: 22, views: 567 }
+      githubUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns'
     }
   ];
 
@@ -143,7 +133,7 @@ const ProjectsSection: React.FC = () => {
                   </Link>
                   <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 leading-relaxed">{project.description}</p>
                   
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {project.tags.slice(0, 3).map(tag => (
                       <span 
                         key={tag} 
@@ -158,19 +148,6 @@ const ProjectsSection: React.FC = () => {
                       </span>
                     )}
                   </div>
-
-                  {project.stats && (
-                    <div className="flex items-center gap-4 mb-4 text-sm text-gray-500 dark:text-gray-400">
-                      <div className="flex items-center">
-                        <Star className="h-4 w-4 mr-1" />
-                        {project.stats.stars}
-                      </div>
-                      <div className="flex items-center">
-                        <Eye className="h-4 w-4 mr-1" />
-                        {project.stats.views}
-                      </div>
-                    </div>
-                  )}
                   
                   <div className="flex justify-between items-center">
                     <a 
