@@ -80,7 +80,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0 font-bold text-xl">
             <Link to="/">
-              <span className="text-blue-600 dark:text-blue-400">My</span>
+              <span className="text-blue-600 dark:text-blue-400">Yasut0ra's</span>
               <span className="text-gray-800 dark:text-white">Portfolio</span>
             </Link>
           </div>
