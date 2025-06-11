@@ -8,6 +8,7 @@ import BlogPage from './pages/BlogPage';
 import ResearchPage from './pages/ResearchPage';
 import BanditPlayground from './pages/BanditPlayground';
 import Footer from './components/Footer';
+import CursorFollower from './components/CursorFollower';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -39,6 +40,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+        <CursorFollower />
         <div className="fixed inset-0 bg-pattern pointer-events-none"></div>
         <div className="fixed inset-0 bg-grid pointer-events-none"></div>
         <div className="relative">

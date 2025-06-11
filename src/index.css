@@ -36,6 +36,29 @@
   }
 }
 
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes magneticPull {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(var(--magnetic-x, 0), var(--magnetic-y, 0)) scale(1.05);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 .animate-blob {
   animation: blob 7s infinite;
 }
@@ -46,6 +69,14 @@
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-ripple {
+  animation: ripple 0.6s linear;
+}
+
+.animate-magnetic {
+  animation: magneticPull 0.3s ease-out;
 }
 
 .animation-delay-2000 {
@@ -107,6 +138,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Custom cursor styles */
+* {
+  cursor: none;
+}
+
+a, button, [role="button"], input, textarea, select {
+  cursor: none;
+}
+
 /* Enhanced focus styles */
 *:focus {
   outline: none;
@@ -123,6 +163,7 @@ body {
   @apply text-gray-800 dark:text-gray-200 leading-relaxed antialiased;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  cursor: none;
 }
 
 /* Enhanced selection styling */
@@ -197,4 +238,68 @@ body {
 
 .btn-secondary {
   @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm text-gray-800 dark:text-white font-semibold py-3 px-6 rounded-xl border border-gray-200/50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Interactive elements */
+.interactive-element {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.interactive-element:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateZ(20px);
+}
+
+/* Magnetic effect */
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magnetic:hover {
+  transform: translate(var(--magnetic-x, 0), var(--magnetic-y, 0)) scale(1.05);
+}
+
+/* Parallax elements */
+.parallax {
+  will-change: transform;
+}
+
+/* Smooth transitions for all interactive elements */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Spotlight effect */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
 }

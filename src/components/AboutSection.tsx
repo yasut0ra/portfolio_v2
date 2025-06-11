@@ -1,5 +1,7 @@
 import React from 'react';
 import { FileText, Award, Code, Heart } from 'lucide-react';
+import InteractiveCard from './InteractiveCard';
+import MagneticButton from './MagneticButton';
 
 const AboutSection: React.FC = () => {
   return (
@@ -17,7 +19,7 @@ const AboutSection: React.FC = () => {
         
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2">
-            <div className="relative group">
+            <InteractiveCard intensity={0.8} className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
               <div className="relative w-full h-96 sm:h-[28rem] bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 rounded-2xl overflow-hidden shadow-2xl">
                 <img 
@@ -31,7 +33,7 @@ const AboutSection: React.FC = () => {
                 <span className="text-white font-bold text-2xl transform -rotate-6">3+</span>
                 <span className="text-white text-xs transform -rotate-6 text-center leading-tight">Years<br/>Experience</span>
               </div>
-            </div>
+            </InteractiveCard>
           </div>
           
           <div className="lg:w-1/2 space-y-8">
@@ -64,9 +66,13 @@ const AboutSection: React.FC = () => {
                 { icon: <Award className="h-5 w-5" />, label: "住所", value: "北海道, 日本", color: "text-emerald-600 dark:text-emerald-400" },
                 { icon: <Heart className="h-5 w-5" />, label: "ステータス", value: "インターン・共同開発募集中", color: "text-rose-600 dark:text-rose-400" }
               ].map((item, index) => (
-                <div key={index} className="group p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
+                <InteractiveCard 
+                  key={index} 
+                  className="p-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-gray-700/50"
+                  intensity={0.3}
+                >
                   <div className="flex items-start space-x-3">
-                    <div className={`${item.color} mt-1 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`${item.color} mt-1 transition-transform duration-300`}>
                       {item.icon}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -74,21 +80,22 @@ const AboutSection: React.FC = () => {
                       <p className="text-gray-800 dark:text-gray-200 font-medium break-words">{item.value}</p>
                     </div>
                   </div>
-                </div>
+                </InteractiveCard>
               ))}
             </div>
             
             <div className="pt-4">
-              <a 
-                href="#" 
-                className="group inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
+              <MagneticButton
+                href="#"
+                className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300"
+                magneticStrength={0.4}
               >
-                <FileText className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                <FileText className="mr-3 h-5 w-5 transition-transform duration-300" />
                 Download CV
                 <div className="ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
                   →
                 </div>
-              </a>
+              </MagneticButton>
             </div>
           </div>
         </div>

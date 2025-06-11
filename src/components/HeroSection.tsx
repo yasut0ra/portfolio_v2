@@ -1,5 +1,8 @@
 import React from 'react';
 import { Github as GitHub, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import MagneticButton from './MagneticButton';
+import InteractiveCard from './InteractiveCard';
+import ParallaxSection from './ParallaxSection';
 
 const HeroSection: React.FC = () => {
   const scrollToNextSection = () => {
@@ -17,11 +20,22 @@ const HeroSection: React.FC = () => {
       {/* Enhanced gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/90 via-white to-purple-50/90 dark:from-gray-900/95 dark:via-gray-800/95 dark:to-blue-900/95 backdrop-blur-sm z-0"></div>
       
-      {/* Enhanced animated background elements */}
-      <div className="absolute top-32 left-10 w-72 h-72 bg-gradient-to-r from-blue-200/60 to-cyan-200/60 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob"></div>
-      <div className="absolute top-52 right-10 w-80 h-80 bg-gradient-to-r from-purple-200/60 to-pink-200/60 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-8 left-20 w-80 h-80 bg-gradient-to-r from-pink-200/60 to-rose-200/60 dark:from-pink-900/30 dark:to-rose-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
-      <div className="absolute bottom-52 right-20 w-72 h-72 bg-gradient-to-r from-teal-200/60 to-emerald-200/60 dark:from-teal-900/30 dark:to-emerald-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-6000"></div>
+      {/* Enhanced animated background elements with parallax */}
+      <ParallaxSection speed={0.2} className="absolute inset-0">
+        <div className="absolute top-32 left-10 w-72 h-72 bg-gradient-to-r from-blue-200/60 to-cyan-200/60 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob"></div>
+      </ParallaxSection>
+      
+      <ParallaxSection speed={0.3} className="absolute inset-0">
+        <div className="absolute top-52 right-10 w-80 h-80 bg-gradient-to-r from-purple-200/60 to-pink-200/60 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-2000"></div>
+      </ParallaxSection>
+      
+      <ParallaxSection speed={0.4} className="absolute inset-0">
+        <div className="absolute bottom-8 left-20 w-80 h-80 bg-gradient-to-r from-pink-200/60 to-rose-200/60 dark:from-pink-900/30 dark:to-rose-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
+      </ParallaxSection>
+      
+      <ParallaxSection speed={0.1} className="absolute inset-0">
+        <div className="absolute bottom-52 right-20 w-72 h-72 bg-gradient-to-r from-teal-200/60 to-emerald-200/60 dark:from-teal-900/30 dark:to-emerald-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-6000"></div>
+      </ParallaxSection>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center">
@@ -50,36 +64,42 @@ const HeroSection: React.FC = () => {
           </div>
           
           <div className="flex justify-center space-x-6 mb-16">
-            <a 
-              href="https://github.com/yasut0ra" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
+            <MagneticButton
+              href="https://github.com/yasut0ra"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50"
+              magneticStrength={0.4}
             >
-              <GitHub className="h-7 w-7 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/takuma-yasuda-7a332533b/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
+              <GitHub className="h-7 w-7 text-gray-800 dark:text-white transition-colors duration-300" />
+            </MagneticButton>
+            
+            <MagneticButton
+              href="https://www.linkedin.com/in/takuma-yasuda-7a332533b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50"
+              magneticStrength={0.4}
             >
-              <Linkedin className="h-7 w-7 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
-            </a>
-            <a 
-              href="mailto:yastar.tkm83@gmail.com" 
-              className="group p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
+              <Linkedin className="h-7 w-7 text-gray-800 dark:text-white transition-colors duration-300" />
+            </MagneticButton>
+            
+            <MagneticButton
+              href="mailto:yastar.tkm83@gmail.com"
+              className="p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50"
+              magneticStrength={0.4}
             >
-              <Mail className="h-7 w-7 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
-            </a>
+              <Mail className="h-7 w-7 text-gray-800 dark:text-white transition-colors duration-300" />
+            </MagneticButton>
           </div>
           
-          <button 
-            onClick={scrollToNextSection} 
-            className="group animate-bounce bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-3 rounded-full shadow-lg hover:shadow-xl border border-gray-200/50 dark:border-gray-700/50 transition-all duration-300"
+          <MagneticButton
+            onClick={scrollToNextSection}
+            className="animate-bounce bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-3 rounded-full shadow-lg border border-gray-200/50 dark:border-gray-700/50"
+            magneticStrength={0.3}
           >
-            <ArrowDown className="h-6 w-6 text-blue-600 dark:text-blue-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300" />
-          </button>
+            <ArrowDown className="h-6 w-6 text-blue-600 dark:text-blue-400 transition-colors duration-300" />
+          </MagneticButton>
         </div>
       </div>
     </section>

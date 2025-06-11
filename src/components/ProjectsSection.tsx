@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ExternalLink, Github, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import InteractiveCard from './InteractiveCard';
+import MagneticButton from './MagneticButton';
 
 const ProjectsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
@@ -36,9 +38,10 @@ const ProjectsSection: React.FC = () => {
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {featuredProjects.map(project => (
-              <div 
-                key={project.id} 
-                className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50"
+              <InteractiveCard 
+                key={project.id}
+                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-gray-200/50 dark:border-gray-700/50"
+                intensity={0.5}
               >
                 <Link to={`/project/${project.id}`} className="block">
                   <div className="relative h-56 overflow-hidden">
@@ -80,28 +83,30 @@ const ProjectsSection: React.FC = () => {
                   </div>
                   
                   <div className="flex justify-between items-center">
-                    <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors group"
+                    <MagneticButton
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+                      magneticStrength={0.2}
                     >
-                      <ExternalLink className="h-4 w-4 mr-1 group-hover:translate-x-1 transition-transform duration-300" />
+                      <ExternalLink className="h-4 w-4 mr-1" />
                       Live Demo
-                    </a>
+                    </MagneticButton>
                     
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-colors group"
+                    <MagneticButton
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-colors"
+                      magneticStrength={0.2}
                     >
-                      <Github className="h-4 w-4 mr-1 group-hover:rotate-12 transition-transform duration-300" />
+                      <Github className="h-4 w-4 mr-1" />
                       Code
-                    </a>
+                    </MagneticButton>
                   </div>
                 </div>
-              </div>
+              </InteractiveCard>
             ))}
           </div>
         </div>
@@ -109,26 +114,28 @@ const ProjectsSection: React.FC = () => {
         {/* Filter Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {filters.map(filter => (
-            <button
+            <MagneticButton
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeFilter === filter
                   ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg'
                   : 'bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200/50 dark:border-gray-700/50'
               }`}
+              magneticStrength={0.3}
             >
               {filter.charAt(0).toUpperCase() + filter.slice(1)}
-            </button>
+            </MagneticButton>
           ))}
         </div>
         
         {/* All Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map(project => (
-            <div 
-              key={project.id} 
-              className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50"
+            <InteractiveCard 
+              key={project.id}
+              className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg border border-gray-200/50 dark:border-gray-700/50"
+              intensity={0.3}
             >
               <Link to={`/project/${project.id}`} className="block">
                 <div className="relative h-48 overflow-hidden">
@@ -161,28 +168,30 @@ const ProjectsSection: React.FC = () => {
                 </div>
                 
                 <div className="flex justify-between items-center">
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors group"
+                  <MagneticButton
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
+                    magneticStrength={0.2}
                   >
-                    <ExternalLink className="h-4 w-4 mr-1 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ExternalLink className="h-4 w-4 mr-1" />
                     Live Demo
-                  </a>
+                  </MagneticButton>
                   
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-colors group"
+                  <MagneticButton
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-medium transition-colors"
+                    magneticStrength={0.2}
                   >
-                    <Github className="h-4 w-4 mr-1 group-hover:rotate-12 transition-transform duration-300" />
+                    <Github className="h-4 w-4 mr-1" />
                     Code
-                  </a>
+                  </MagneticButton>
                 </div>
               </div>
-            </div>
+            </InteractiveCard>
           ))}
         </div>
       </div>
