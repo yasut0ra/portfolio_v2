@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <Router basename="/portfolio_v2">
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
         <div className="fixed inset-0 bg-pattern pointer-events-none"></div>
         <div className="fixed inset-0 bg-grid pointer-events-none"></div>
