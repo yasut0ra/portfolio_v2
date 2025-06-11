@@ -149,7 +149,7 @@ const ContactSection: React.FC = () => {
                   className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition duration-300 ease-in-out"
                 >
                   <Send className="mr-2 h-5 w-5" />
-                  Send Message
+                  送信
                 </button>
               </form>
             </div>
