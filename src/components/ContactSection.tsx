@@ -155,7 +155,7 @@ const ContactSection: React.FC = () => {
             </div>
             
             <div className="hidden lg:block bg-gray-300 dark:bg-gray-600">
-              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/contact-bg.jpg')" }}></div>
+              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/contact-bg.png')" }}></div>
             </div>
           </div>
         </div>
