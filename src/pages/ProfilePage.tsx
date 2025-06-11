@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Calendar, Briefcase, GraduationCap, Award, User, Code, Heart, Star, Trophy, Target } from 'lucide-react';
+import { Mail, Phone, MapPin, Calendar, Briefcase, GraduationCap, Award, User, Code, Heart, Star, Trophy, Target, Shield } from 'lucide-react';
 
 const ProfilePage: React.FC = () => {
   const experiences = [
@@ -70,6 +70,12 @@ const ProfilePage: React.FC = () => {
       year: '2025',
       icon: <Star className="h-6 w-6" />,
       color: 'from-green-500 to-emerald-500'
+    },
+    {
+      name: 'Basic SecCap 7',
+      year: '2025',
+      icon: <Shield className="h-6 w-6" />,
+      color: 'from-red-500 to-pink-500'
     }
   ];
 
