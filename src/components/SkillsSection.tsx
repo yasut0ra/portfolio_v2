@@ -20,27 +20,33 @@ const SkillsSection: React.FC = () => {
   }, [inView]);
 
   const technicalSkills: Skill[] = [
+    {
+      name: 'Python',
+      percentage: 90,
+      color: 'bg-green-600 dark:bg-green-500',
+      icon: '🐍'
+    },
     { 
       name: 'JavaScript/TypeScript',
-      percentage: 90,
+      percentage: 80,
       color: 'bg-yellow-400 dark:bg-yellow-500',
       icon: '⚡'
     },
     { 
       name: 'React',
-      percentage: 85,
+      percentage: 80,
       color: 'bg-blue-500 dark:bg-blue-400',
       icon: '⚛️'
     },
     { 
       name: 'Node.js',
       percentage: 80,
-      color: 'bg-green-600 dark:bg-green-500',
+      color: 'bg-green-400 dark:bg-green-500',
       icon: '🚀'
     },
     { 
       name: 'HTML/CSS',
-      percentage: 95,
+      percentage: 80,
       color: 'bg-orange-500 dark:bg-orange-400',
       icon: '🎨'
     },
@@ -61,25 +67,25 @@ const SkillsSection: React.FC = () => {
   const softSkills: Skill[] = [
     { 
       name: 'Problem Solving',
-      percentage: 95,
+      percentage: 90,
       color: 'bg-indigo-600 dark:bg-indigo-500',
       icon: '🧩'
     },
     { 
       name: 'Communication',
-      percentage: 85,
+      percentage: 70,
       color: 'bg-teal-600 dark:bg-teal-500',
       icon: '💬'
     },
     { 
       name: 'Team Collaboration',
-      percentage: 90,
+      percentage: 80,
       color: 'bg-cyan-600 dark:bg-cyan-500',
       icon: '👥'
     },
     { 
       name: 'Project Management',
-      percentage: 80,
+      percentage: 60,
       color: 'bg-rose-600 dark:bg-rose-500',
       icon: '📊'
     },
@@ -120,7 +126,8 @@ const SkillsSection: React.FC = () => {
           </h2>
           <div className="w-16 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4 rounded-full"></div>
           <p className="text-gray-700 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-            Here are my skills and areas of expertise that I've developed over the years
+          これまでに習得してきたスキルと得意分野です。
+フルスタック開発や研究プロジェクトを通じて実践的に磨いてきました。
           </p>
         </motion.div>
         
@@ -190,7 +197,7 @@ const SkillsSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
         >
-          {['JavaScript', 'TypeScript', 'React', 'Node.js', 'HTML5', 'CSS3', 'Git', 'MongoDB', 'GraphQL', 'AWS', 'Docker', 'Figma'].map((tech, index) => (
+          {['Python','JavaScript', 'TypeScript', 'React', 'Node.js', 'HTML5', 'CSS3', 'Git', 'MongoDB', 'GraphQL', 'AWS', 'Docker'].map((tech, index) => (
             <motion.div 
               key={index}
               whileHover={{ scale: 1.05 }}
