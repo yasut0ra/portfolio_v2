@@ -26,7 +26,7 @@ const HeroSection: React.FC = () => {
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
             <span className="block">Hello, I'm</span>
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">Your Name</span>
+            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">Yasut0ra</span>
           </h1>
           
           <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-8">
@@ -34,17 +34,20 @@ const HeroSection: React.FC = () => {
           </h2>
           
           <p className="max-w-xl mx-auto text-gray-600 dark:text-gray-400 text-lg mb-10 relative">
-            Passionate about creating beautiful, functional, and user-friendly applications that solve real-world problems.
+          現実の課題を解決する、<br/>
+          美しく・機能的で・ユーザーフレンドリーなアプリケーションを開発することに情熱を注いでいます。<br/>
+          現在は 推薦システム × バンディットアルゴリズム の研究に取り組んでおり、<br/>
+          将来は AI開発のリーダー を目指しています。
           </p>
           
           <div className="flex justify-center space-x-4 mb-12">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+            <a href="https://github.com/yasut0ra" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
               <GitHub className="h-6 w-6 text-gray-800 dark:text-white" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+            <a href="https://www.linkedin.com/in/takuma-yasuda-7a332533b/" target="_blank" rel="noopener noreferrer" className="p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
               <Linkedin className="h-6 w-6 text-gray-800 dark:text-white" />
             </a>
-            <a href="mailto:your-email@example.com" className="p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+            <a href="mailto:yastar.tkm83@gmail.com" className="p-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300">
               <Mail className="h-6 w-6 text-gray-800 dark:text-white" />
             </a>
           </div>
