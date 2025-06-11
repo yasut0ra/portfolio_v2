@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, Phone } from 'lucide-react';
+import { Mail, MapPin, Send, Phone, MessageCircle, User, FileText } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +9,8 @@ const ContactSection: React.FC = () => {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prevData => ({
@@ -17,79 +19,96 @@ const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, this would send the form data to a server
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     console.log('Form submitted:', formData);
-    // Reset form
     setFormData({
       name: '',
       email: '',
       subject: '',
       message: ''
     });
-    // Show success message
+    setIsSubmitting(false);
     alert('Thank you for your message! I will get back to you soon.');
   };
 
   const contactInfo = [
     {
-      icon: <Mail className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
+      icon: <Mail className="h-7 w-7" />,
       title: 'メールアドレス',
       content: 'yastar.tkm83@gmail.com',
-      link: 'mailto:yastar.tkm83@gmail.com'
+      link: 'mailto:yastar.tkm83@gmail.com',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
-      icon: <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
+      icon: <Phone className="h-7 w-7" />,
       title: '電話番号',
       content: '非公開',
-      link: '#'
+      link: '#',
+      color: 'from-green-500 to-emerald-500'
     },
     {
-      icon: <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
+      icon: <MapPin className="h-7 w-7" />,
       title: '住所',
       content: '北海道, 日本',
-      link: '#'
+      link: '#',
+      color: 'from-purple-500 to-pink-500'
     }
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="contact" className="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            Contact <span className="text-blue-600 dark:text-blue-400">Me</span>
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">Me</span>
           </h2>
-          <div className="w-16 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4 rounded-full"></div>
-          <p className="text-gray-700 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-            ご質問やご意見があれば、お気軽にご連絡ください。
+          <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mx-auto rounded-full"></div>
+          <p className="text-gray-600 dark:text-gray-400 mt-6 text-lg max-w-2xl mx-auto">
+            ご質問やご意見があれば、お気軽にご連絡ください。<br />
+            新しいプロジェクトやコラボレーションの機会をお待ちしています。
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {contactInfo.map((item, index) => (
             <a 
               key={index} 
               href={item.link}
-              className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md text-center transform hover:-translate-y-1 transition-transform duration-300"
+              className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl text-center transform hover:-translate-y-2 transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50"
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full mb-4">
+              <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${item.color} rounded-2xl mb-6 text-white group-hover:scale-110 transition-transform duration-300`}>
                 {item.icon}
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{item.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300">{item.content}</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 font-medium">{item.content}</p>
             </a>
           ))}
         </div>
         
-        <div className="bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-gray-200/50 dark:border-gray-700/50">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-8 lg:p-12">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">お問い合わせ</h3>
+              <div className="mb-8">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                  <MessageCircle className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3" />
+                  お問い合わせ
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  プロジェクトのご相談、技術的な質問、コラボレーションのご提案など、何でもお気軽にお聞かせください。
+                </p>
+              </div>
               
-              <form onSubmit={handleSubmit}>
-                <div className="mb-6">
-                  <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">お名前</label>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="relative">
+                  <User className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
                   <input 
                     type="text" 
                     id="name" 
@@ -97,13 +116,13 @@ const ContactSection: React.FC = () => {
                     value={formData.name} 
                     onChange={handleChange} 
                     required 
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
-                    placeholder="山田太郎"
+                    className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700/50 dark:text-white backdrop-blur-sm transition-all duration-300"
+                    placeholder="お名前"
                   />
                 </div>
                 
-                <div className="mb-6">
-                  <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 mb-2">メールアドレス</label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
                   <input 
                     type="email" 
                     id="email" 
@@ -111,13 +130,13 @@ const ContactSection: React.FC = () => {
                     value={formData.email} 
                     onChange={handleChange} 
                     required 
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
-                    placeholder="yamada@example.com"
+                    className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700/50 dark:text-white backdrop-blur-sm transition-all duration-300"
+                    placeholder="メールアドレス"
                   />
                 </div>
                 
-                <div className="mb-6">
-                  <label htmlFor="subject" className="block text-gray-700 dark:text-gray-300 mb-2">件名</label>
+                <div className="relative">
+                  <FileText className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
                   <input 
                     type="text" 
                     id="subject" 
@@ -125,37 +144,56 @@ const ContactSection: React.FC = () => {
                     value={formData.subject} 
                     onChange={handleChange} 
                     required 
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                    className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700/50 dark:text-white backdrop-blur-sm transition-all duration-300"
                     placeholder="件名"
                   />
                 </div>
                 
-                <div className="mb-6">
-                  <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 mb-2">お問い合わせ内容</label>
+                <div className="relative">
+                  <MessageCircle className="absolute left-4 top-4 h-5 w-5 text-gray-400" />
                   <textarea 
                     id="message" 
                     name="message" 
                     value={formData.message} 
                     onChange={handleChange} 
                     required 
-                    rows={5} 
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
+                    rows={6} 
+                    className="w-full pl-12 pr-4 py-4 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700/50 dark:text-white backdrop-blur-sm transition-all duration-300 resize-none"
                     placeholder="お問い合わせ内容をご記入ください。"
                   ></textarea>
                 </div>
                 
                 <button 
                   type="submit" 
-                  className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition duration-300 ease-in-out"
+                  disabled={isSubmitting}
+                  className="group w-full inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl disabled:transform-none disabled:shadow-none"
                 >
-                  <Send className="mr-2 h-5 w-5" />
-                  送信
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                      送信中...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                      送信
+                    </>
+                  )}
                 </button>
               </form>
             </div>
             
-            <div className="hidden lg:block bg-gray-300 dark:bg-gray-600">
-              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/contact-bg.png')" }}></div>
+            <div className="hidden lg:block relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 dark:from-blue-400/20 dark:to-purple-400/20"></div>
+              <div className="h-full w-full bg-cover bg-center relative" style={{ backgroundImage: "url('/images/contact-bg.png')" }}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <h4 className="text-white text-2xl font-bold mb-2">Let's Work Together</h4>
+                  <p className="text-gray-200">
+                    新しいアイデアを現実にしましょう。あなたのプロジェクトをお聞かせください。
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
