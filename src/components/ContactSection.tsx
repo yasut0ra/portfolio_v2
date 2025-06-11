@@ -40,6 +40,12 @@ const ContactSection: React.FC = () => {
       link: 'mailto:yastar.tkm83@gmail.com'
     },
     {
+      icon: <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
+      title: 'X',
+      content: '@YaSut0ra94970',
+      link: 'https://x.com/YaSut0ra94970'
+    },
+    {
       icon: <MapPin className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
       title: 'Location',
       content: 'Hokkaido, Japan',
