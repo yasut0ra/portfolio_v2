@@ -38,7 +38,7 @@ const ProjectsSection: React.FC = () => {
       id: 3,
       title: 'ai-stream',
       description: 'AIがカメラ映像やPC画面、音声からコメントを自動生成するアプリ。AIを活用したインタラクティブな擬似視聴者システム。',
-      image: '/images/projects/ai-stream.jpg',
+      image: '/images/projects/ai-stream.png',
       tags: ['React', 'TypeScript', 'OpenAI', 'Next.js','FastAPI'],
       liveUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2',
       githubUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2'
