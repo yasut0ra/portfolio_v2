@@ -24,41 +24,31 @@ const ResearchPage: React.FC = () => {
   const publications: Publication[] = [
     {
       id: 1,
-      title: "Deep Learning Approaches for Natural Language Processing in Japanese Text Analysis",
-      authors: ["Your Name", "Co-author One", "Co-author Two"],
-      conference: "International Conference on Natural Language Processing (ICNLP 2023)",
-      year: "2023",
-      abstract: "This paper presents novel deep learning approaches for processing Japanese text, introducing innovative methods for tokenization and semantic analysis...",
-      doi: "10.1000/example.2023.1234",
-      pdf: "https://example.com/paper.pdf",
-      citations: 12
+      title: "現在、学部研究を進行中。今後投稿予定。",
+      authors: ["Yasut0ra"],
+      conference: "",
+      year: "2025",
+      abstract: "現在、学部研究を進行中。今後投稿予定。",
+      doi: "",
+      pdf: "",
+      citations: 0
     },
-    {
-      id: 2,
-      title: "Efficient Neural Network Architectures for Real-time Language Processing",
-      authors: ["Your Name", "Co-author Three"],
-      conference: "ACM Conference on Artificial Intelligence (ACM AI 2022)",
-      year: "2022",
-      abstract: "We propose a new neural network architecture optimized for real-time language processing, achieving state-of-the-art performance while maintaining low latency...",
-      doi: "10.1000/example.2022.5678",
-      citations: 25
-    }
   ];
 
   const researchInterests: ResearchInterest[] = [
     {
-      title: "Natural Language Processing",
-      description: "Focus on developing efficient algorithms for processing and understanding human language, particularly Japanese text analysis.",
+      title: "推薦システム",
+      description: "ユーザの多様性や満足度を考慮した推薦手法。強化学習やバンディット問題の応用。",
       icon: <BookOpen className="h-8 w-8 text-blue-500" />
     },
     {
-      title: "Deep Learning",
-      description: "Research on neural network architectures and their applications in real-world problems.",
+      title: "バンディットアルゴリズム",
+      description: "セミバンディット / ランキングバンディット。探索と活用のバランス、パーソナライズ手法の設計。",
       icon: <Users className="h-8 w-8 text-blue-500" />
     },
     {
-      title: "Machine Learning",
-      description: "Exploring novel approaches to machine learning with applications in natural language processing and computer vision.",
+      title: "深層学習",
+      description: "大規模モデルによるユーザモデリング。転移学習・埋め込み表現を用いた推薦最適化。",
       icon: <Award className="h-8 w-8 text-blue-500" />
     }
   ];
@@ -68,17 +58,17 @@ const ResearchPage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Research <span className="text-blue-600 dark:text-blue-400">Work</span>
+            研究 <span className="text-blue-600 dark:text-blue-400">活動</span>
           </h1>
           <p className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Exploring the frontiers of Natural Language Processing and Machine Learning
+          推薦システムと機械学習のフロンティアを探究中。
           </p>
         </div>
 
         {/* Interactive Demos Section */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Interactive Demos
+            インタラクティブデモ
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link
@@ -88,11 +78,11 @@ const ResearchPage: React.FC = () => {
               <div className="flex items-center mb-4">
                 <Play className="h-8 w-8 text-blue-500 mr-3" />
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Multi-Armed Bandit Playground
+                  バンディットアルゴリズムのシミュレーション
                 </h3>
               </div>
               <p className="text-gray-700 dark:text-gray-300">
-                Explore and experiment with different bandit algorithms in this interactive simulation environment.
+                バンディットアルゴリズムのシミュレーション環境で、様々なアルゴリズムを試すことができます。
               </p>
             </Link>
           </div>
@@ -101,7 +91,7 @@ const ResearchPage: React.FC = () => {
         {/* Research Interests */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Research Interests
+            研究関心領域
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {researchInterests.map((interest, index) => (
@@ -121,7 +111,7 @@ const ResearchPage: React.FC = () => {
         {/* Publications */}
         <section>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Publications
+            論文
           </h2>
           <div className="space-y-6">
             {publications.map(pub => (
