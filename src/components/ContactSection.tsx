@@ -149,14 +149,13 @@ const ContactSection: React.FC = () => {
                   className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-md transition duration-300 ease-in-out"
                 >
                   <Send className="mr-2 h-5 w-5" />
-                  Send Message
+                  送信
                 </button>
               </form>
             </div>
             
             <div className="hidden lg:block bg-gray-300 dark:bg-gray-600">
-              {/* Google Maps or other map embed would go here */}
-              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')" }}></div>
+              <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('/images/contact-bg.png')" }}></div>
             </div>
           </div>
         </div>

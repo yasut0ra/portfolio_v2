@@ -15,7 +15,7 @@ const ProjectDetailPage: React.FC = () => {
       The project features a responsive design, real-time inventory management, secure payment processing, 
       and an intuitive admin dashboard for managing products and orders.
     `,
-    image: 'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: '/images/projects/nomitto.jpg',
     tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Redux', 'Stripe'],
     liveUrl: '#',
     githubUrl: '#',
@@ -41,9 +41,9 @@ const ProjectDetailPage: React.FC = () => {
       'Tailwind CSS for styling'
     ],
     screenshots: [
-      'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      'https://images.pexels.com/photos/6956904/pexels-photo-6956904.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      'https://images.pexels.com/photos/6956905/pexels-photo-6956905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+      '/images/projects/nomitto.jpg',
+      '/images/projects/minitask.jpg',
+      '/images/projects/ai-stream.jpg'
     ]
   };
 

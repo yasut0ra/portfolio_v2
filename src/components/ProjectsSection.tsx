@@ -20,7 +20,7 @@ const ProjectsSection: React.FC = () => {
       id: 1,
       title: 'Nomitto!（のみっと！）',
       description: '「のみっと！」は、友達と遊びたいけど誘うのが面倒な時に、飲み会や食事のイベントを自動提案するWebアプリです。ユーザーが設定した条件に合うイベントを自動で提案します。',
-      image: 'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: '/images/projects/nomitto.png',
       tags: ['React','JavaScript', 'Node.js', 'Firebase'],
       liveUrl: 'https://nomitto-app.vercel.app/',
       githubUrl: 'https://github.com/Team-Futsukayoi/Nomikai-Setting-App'
@@ -29,7 +29,7 @@ const ProjectsSection: React.FC = () => {
       id: 2,
       title: 'minitask',
       description: 'タスク管理アプリ。逆境モードでタスクをこなすことで、自分の意志力を鍛えるユニークな機能があります。',
-      image: 'https://images.pexels.com/photos/5386754/pexels-photo-5386754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: '/images/projects/minitask.png',
       tags: ['React', 'TypeScript', 'MongoDB'],
       liveUrl: 'https://lambent-lolly-5e5cdb.netlify.app',
       githubUrl: 'https://github.com/yasut0ra/mini-task'
@@ -38,7 +38,7 @@ const ProjectsSection: React.FC = () => {
       id: 3,
       title: 'ai-stream',
       description: 'AIがカメラ映像やPC画面、音声からコメントを自動生成するアプリ。AIを活用したインタラクティブな擬似視聴者システム。',
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: '/images/projects/ai-stream.png',
       tags: ['React', 'TypeScript', 'OpenAI', 'Next.js','FastAPI'],
       liveUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2',
       githubUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2'
@@ -47,7 +47,7 @@ const ProjectsSection: React.FC = () => {
       id: 4,
       title: 'Portfolio Website',
       description: 'このポートフォリオサイトです。',
-      image: 'https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: '/images/projects/portfolio.png',
       tags: ['React', 'Tailwind'],
       liveUrl: 'https://yasut0ra.github.io/portfolio_v2/',
       githubUrl: 'https://github.com/yasut0ra/portfolio_v2'
@@ -56,7 +56,7 @@ const ProjectsSection: React.FC = () => {
       id: 5,
       title: 'Recomate',
       description: 'AIがユーザーの性格や特徴を分析し、それに合わせたオススメを提案する会話アプリです。',
-      image: 'https://images.pexels.com/photos/35550/ipad-tablet-technology-touch.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: '/images/projects/recomate.png',
       tags: ['React', 'TypeScript', 'Python', 'Electron','OpenAI'],
       liveUrl: 'https://recomate-landing.netlify.app/',
       githubUrl: 'https://github.com/yasut0ra/recomate'
@@ -65,7 +65,7 @@ const ProjectsSection: React.FC = () => {
       id: 6,
       title: 'Muu',
       description: '最初は匿名状態から始まり、他人の評価によって性格や特徴が形作られるSNSです。',
-      image: 'https://images.pexels.com/photos/4226896/pexels-photo-4226896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      image: '/images/projects/muu.png',
       tags: ['ReactNative', 'TypeScript', 'Expo', 'Supabase'],
       liveUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns',
       githubUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns'

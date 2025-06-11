@@ -16,9 +16,8 @@ const AboutSection: React.FC = () => {
           <div className="lg:w-1/2">
             <div className="relative">
               <div className="w-full h-80 sm:h-96 bg-gray-300 dark:bg-gray-700 rounded-lg overflow-hidden">
-                {/* Replace with your actual image */}
                 <img 
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                  src="/images/profile.png" 
                   alt="Portrait" 
                   className="w-full h-full object-cover"
                 />

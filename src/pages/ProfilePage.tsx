@@ -14,7 +14,7 @@ const ProfilePage: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center">
               <div className="relative -mt-20 w-40 h-40">
                 <img
-                  src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg"
+                  src="/images/profile.png"
                   alt="Profile"
                   className="w-full h-full rounded-full border-4 border-white dark:border-gray-800 object-cover shadow-lg"
                 />
