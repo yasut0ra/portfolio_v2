@@ -15,10 +15,12 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <h2 className="text-2xl font-bold">
-              <span className="text-blue-400">My</span>Portfolio
+              <span className="text-blue-400">Yasut0ra's</span>Portfolio
             </h2>
             <p className="text-gray-400 mt-2 max-w-md">
-              Creating beautiful, functional, and user-friendly applications that solve real-world problems.
+            Passionate about building intelligent, beautiful, and user-friendly applications.
+Currently researching recommender systems × bandit algorithms,
+and aiming to lead AI development in the future.
             </p>
           </div>
           
@@ -46,7 +48,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Your Name. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Yasut0ra. All rights reserved.</p>
         </div>
       </div>
     </footer>
