@@ -65,7 +65,7 @@ const ProjectsSection: React.FC = () => {
       id: 6,
       title: 'Muu',
       description: '最初は匿名状態から始まり、他人の評価によって性格や特徴が形作られるSNSです。',
-      image: '/images/projects/muu.jpg',
+      image: '/images/projects/muu.png',
       tags: ['ReactNative', 'TypeScript', 'Expo', 'Supabase'],
       liveUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns',
       githubUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns'
