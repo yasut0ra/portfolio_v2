@@ -18,61 +18,61 @@ const ProjectsSection: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'E-Commerce Website',
-      description: 'A full-featured e-commerce platform with product listings, cart functionality, and payment processing.',
+      title: 'Nomitto!（のみっと！）',
+      description: '「のみっと！」は、友達と遊びたいけど誘うのが面倒な時に、飲み会や食事のイベントを自動提案するWebアプリです。ユーザーが設定した条件に合うイベントを自動で提案します。',
       image: 'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      tags: ['React', 'Node.js', 'MongoDB'],
-      liveUrl: '#',
-      githubUrl: '#'
+      tags: ['React','JavaScript', 'Node.js', 'Firebase'],
+      liveUrl: 'https://nomitto-app.vercel.app/',
+      githubUrl: 'https://github.com/Team-Futsukayoi/Nomikai-Setting-App'
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A productivity app for managing tasks, setting deadlines, and tracking progress.',
+      title: 'minitask',
+      description: 'タスク管理アプリ。逆境モードでタスクをこなすことで、自分の意志力を鍛えるユニークな機能があります。',
       image: 'https://images.pexels.com/photos/5386754/pexels-photo-5386754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      tags: ['React', 'Firebase'],
-      liveUrl: '#',
-      githubUrl: '#'
+      tags: ['React', 'TypeScript', 'MongoDB'],
+      liveUrl: 'https://lambent-lolly-5e5cdb.netlify.app',
+      githubUrl: 'https://github.com/yasut0ra/mini-task'
     },
     {
       id: 3,
-      title: 'Weather Dashboard',
-      description: 'Real-time weather information with forecasts, maps, and location-based data.',
+      title: 'ai-stream',
+      description: 'AIがカメラ映像やPC画面、音声からコメントを自動生成するアプリ。AIを活用したインタラクティブな擬似視聴者システム。',
       image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      tags: ['JavaScript', 'API'],
-      liveUrl: '#',
-      githubUrl: '#'
+      tags: ['React', 'TypeScript', 'OpenAI', 'Next.js','FastAPI'],
+      liveUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2',
+      githubUrl: 'https://github.com/Appetite-For-Destruction/ai-stream-companion2'
     },
     {
       id: 4,
       title: 'Portfolio Website',
-      description: 'A professional portfolio website to showcase skills and projects.',
+      description: 'このポートフォリオサイトです。',
       image: 'https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tags: ['React', 'Tailwind'],
-      liveUrl: '#',
-      githubUrl: '#'
+      liveUrl: 'https://yasut0ra.github.io/portfolio_v2/',
+      githubUrl: 'https://github.com/yasut0ra/portfolio_v2'
     },
     {
       id: 5,
-      title: 'Social Media Dashboard',
-      description: 'Analytics dashboard for tracking social media performance across platforms.',
+      title: 'Recomate',
+      description: 'AIがユーザーの性格や特徴を分析し、それに合わせたオススメを提案する会話アプリです。',
       image: 'https://images.pexels.com/photos/35550/ipad-tablet-technology-touch.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      tags: ['React', 'Chart.js', 'API'],
-      liveUrl: '#',
-      githubUrl: '#'
+      tags: ['React', 'TypeScript', 'Python', 'Electron','OpenAI'],
+      liveUrl: 'https://recomate-landing.netlify.app/',
+      githubUrl: 'https://github.com/yasut0ra/recomate'
     },
     {
       id: 6,
-      title: 'Recipe Finder App',
-      description: 'Search for recipes based on ingredients, dietary preferences, and meal types.',
+      title: 'Muu',
+      description: '最初は匿名状態から始まり、他人の評価によって性格や特徴が形作られるSNSです。',
       image: 'https://images.pexels.com/photos/4226896/pexels-photo-4226896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      tags: ['JavaScript', 'API'],
-      liveUrl: '#',
-      githubUrl: '#'
+      tags: ['ReactNative', 'TypeScript', 'Expo', 'Supabase'],
+      liveUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns',
+      githubUrl: 'https://github.com/Team-Futsukayoi/zero-start-sns'
     }
   ];
 
-  const filters = ['all', 'React', 'JavaScript', 'Node.js', 'API', 'Firebase'];
+  const filters = ['all', 'React', 'TypeScript', 'Node.js', 'Python', 'Electron', 'ReactNative', 'Expo', 'Supabase', 'OpenAI', 'Next.js', 'FastAPI'];
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 
@@ -87,7 +87,8 @@ const ProjectsSection: React.FC = () => {
           </h2>
           <div className="w-16 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4 rounded-full"></div>
           <p className="text-gray-700 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-            Here are some of my recent projects. Each one was built to solve a specific problem or learn new technologies.
+          私がこれまでに開発・公開してきたプロジェクトです。
+          技術習得や実世界の課題解決を目的に取り組んできました。
           </p>
         </div>
         
