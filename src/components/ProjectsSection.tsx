@@ -56,7 +56,7 @@ const ProjectsSection: React.FC = () => {
       id: 5,
       title: 'Recomate',
       description: 'AIがユーザーの性格や特徴を分析し、それに合わせたオススメを提案する会話アプリです。',
-      image: '/images/projects/recomate.jpg',
+      image: '/images/projects/recomate.png',
       tags: ['React', 'TypeScript', 'Python', 'Electron','OpenAI'],
       liveUrl: 'https://recomate-landing.netlify.app/',
       githubUrl: 'https://github.com/yasut0ra/recomate'
