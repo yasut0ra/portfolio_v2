@@ -18,21 +18,22 @@ const Footer: React.FC = () => {
               <span className="text-blue-400">Yasut0ra's</span>Portfolio
             </h2>
             <p className="text-gray-400 mt-2 max-w-md">
-            Passionate about building intelligent, beautiful, and user-friendly applications.
-Currently researching recommender systems × bandit algorithms,
-and aiming to lead AI development in the future.
+            美しく、機能的で、ユーザーに優しいアプリケーションを開発し、現実世界の課題を解決します。
             </p>
           </div>
           
           <div className="flex flex-col items-center md:items-end">
             <div className="flex space-x-4 mb-4">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
+              <a href="https://github.com/yasut0ra" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
                 <GitHub className="h-5 w-5 text-white" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
+              <a href="https://x.com/YaSut0ra94970" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
+                <X className="h-5 w-5 text-white" />
+              </a>
+              <a href="https://www.linkedin.com/in/takuma-yasuda-7a332533b/" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
                 <Linkedin className="h-5 w-5 text-white" />
               </a>
-              <a href="mailto:your-email@example.com" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
+              <a href="mailto:yastar.tkm83@gmail.com" className="p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300">
                 <Mail className="h-5 w-5 text-white" />
               </a>
             </div>
