@@ -29,7 +29,7 @@ const ProjectsSection: React.FC = () => {
       id: 2,
       title: 'minitask',
       description: 'タスク管理アプリ。逆境モードでタスクをこなすことで、自分の意志力を鍛えるユニークな機能があります。',
-      image: '/images/projects/minitask.jpg',
+      image: '/images/projects/minitask.png',
       tags: ['React', 'TypeScript', 'MongoDB'],
       liveUrl: 'https://lambent-lolly-5e5cdb.netlify.app',
       githubUrl: 'https://github.com/yasut0ra/mini-task'
