@@ -430,7 +430,7 @@ const BlogPage: React.FC = () => {
           </h3>
           <div className="flex justify-center space-x-6">
             <a
-              href="https://zenn.dev/your-username"
+              href="https://zenn.dev/yasut0ra"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
@@ -439,7 +439,7 @@ const BlogPage: React.FC = () => {
               <ExternalLink className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </a>
             <a
-              href="https://qiita.com/your-username"
+              href="https://qiita.com/yasut0ra"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
