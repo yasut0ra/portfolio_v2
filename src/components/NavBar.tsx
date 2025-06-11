@@ -75,28 +75,39 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md' : 'bg-transparent'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-200/50 dark:border-gray-700/50' 
+        : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0 font-bold text-xl">
-            <Link to="/">
-              <span className="text-blue-600 dark:text-blue-400">Yasut0ra's</span>
-              <span className="text-gray-800 dark:text-white">Portfolio</span>
+        <div className="flex items-center justify-between h-20">
+          <div className="flex-shrink-0">
+            <Link to="/" className="group">
+              <div className="font-bold text-2xl flex items-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white font-bold text-lg">Y</span>
+                </div>
+                <div>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">Yasut0ra's</span>
+                  <span className="text-gray-800 dark:text-white ml-1">Portfolio</span>
+                </div>
+              </div>
             </Link>
           </div>
           
           {/* Desktop menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-4">
+            <div className="ml-10 flex items-center space-x-1">
               {location.pathname === '/' ? (
                 navLinks.map(link => (
                   <button
                     key={link.id}
                     onClick={() => scrollTo(link.id)}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
                       activeSection === link.id
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                        ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                     }`}
                   >
                     {link.label}
@@ -105,7 +116,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
               ) : (
                 <Link
                   to="/"
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                  className="px-4 py-2 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-300"
                 >
                   Back to Home
                 </Link>
@@ -114,25 +125,27 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
                     location.pathname === link.to
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                      ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                   }`}
                 >
                   {link.label}
                 </Link>
               ))}
-              <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+              <div className="ml-4">
+                <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+              </div>
             </div>
           </div>
           
           {/* Mobile menu button */}
-          <div className="flex md:hidden items-center">
+          <div className="flex md:hidden items-center space-x-2">
             <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
             <button
               onClick={toggleMenu}
-              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-xl text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 focus:outline-none transition-all duration-300"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -141,17 +154,19 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 invisible'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 shadow-md">
+      <div className={`md:hidden transition-all duration-300 ease-in-out ${
+        isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 invisible'
+      }`}>
+        <div className="px-4 pt-2 pb-6 space-y-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-t border-gray-200/50 dark:border-gray-700/50">
           {location.pathname === '/' ? (
             navLinks.map(link => (
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left ${
+                className={`block w-full text-left px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
                   activeSection === link.id
-                    ? 'text-blue-600 dark:text-blue-400 bg-gray-100 dark:bg-gray-800'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                    ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
                 }`}
               >
                 {link.label}
@@ -160,7 +175,7 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
           ) : (
             <Link
               to="/"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="block px-4 py-3 rounded-xl text-base font-semibold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-all duration-300"
             >
               Back to Home
             </Link>
@@ -169,10 +184,10 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
             <Link
               key={link.to}
               to={link.to}
-              className={`block px-3 py-2 rounded-md text-base font-medium ${
+              className={`block px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
                 location.pathname === link.to
-                  ? 'text-blue-600 dark:text-blue-400 bg-gray-100 dark:bg-gray-800'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                  ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
               }`}
             >
               {link.label}
