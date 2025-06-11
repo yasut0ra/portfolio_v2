@@ -24,7 +24,7 @@ const AboutSection: React.FC = () => {
                 />
               </div>
               <div className="absolute -bottom-5 -right-5 w-24 h-24 bg-blue-600 dark:bg-blue-500 rounded-lg flex items-center justify-center transform rotate-12 shadow-lg">
-                <span className="text-white font-bold text-xl transform -rotate-12">5+</span>
+                <span className="text-white font-bold text-xl transform -rotate-12">3+</span>
                 <span className="text-white text-xs transform -rotate-12 mt-4">Years<br/>Exp.</span>
               </div>
             </div>
@@ -32,10 +32,14 @@ const AboutSection: React.FC = () => {
           
           <div className="lg:w-1/2 mt-12 lg:mt-0">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Who am I?
+              私について
             </h3>
             <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-              I'm a passionate Full Stack Developer with over 5 years of experience in creating beautiful, functional, and user-friendly applications. I specialize in JavaScript, React, Node.js, and modern web technologies.
+            私は北海道大学の情報系学生であり、
+フルスタック開発とAIの応用（特に推薦システムとバンディットアルゴリズム）に情熱を注いでいます。<br/>
+美しく、機能的で、ユーザーにやさしいアプリケーションを作ることが好きで、<br/>
+フロントエンドとバックエンドの両方の知識を活かして、企画から実装・運用まで一貫した開発が可能です。<br/>
+最近は特に、能動的に会話できるAIアシスタントなどのプロジェクトに取り組んでいます。
             </p>
             <p className="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
               I enjoy solving complex problems and turning ideas into reality through elegant code. My background in both front-end and back-end development allows me to build complete solutions from concept to deployment.
@@ -44,19 +48,19 @@ const AboutSection: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-                <span className="text-gray-800 dark:text-gray-200">Name: Your Name</span>
+                <span className="text-gray-800 dark:text-gray-200">名前（ハンドルネーム）: Yasut0ra</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-                <span className="text-gray-800 dark:text-gray-200">Email: your@email.com</span>
+                <span className="text-gray-800 dark:text-gray-200">メールアドレス: yastar.tkm83@gmail.com</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-                <span className="text-gray-800 dark:text-gray-200">Location: Your City, Country</span>
+                <span className="text-gray-800 dark:text-gray-200">住所: 北海道, 日本</span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-                <span className="text-gray-800 dark:text-gray-200">Availability: Available</span>
+                <span className="text-gray-800 dark:text-gray-200">ステータス: インターン・共同開発募集中</span>
               </div>
             </div>
             
