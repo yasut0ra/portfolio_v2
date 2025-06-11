@@ -57,8 +57,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       '/images/projects/nomitto.png',
-      '/images/projects/nomitto.png',
-      '/images/projects/nomitto.png'
+      // '/images/projects/nomitto.png',
+      // '/images/projects/nomitto.png'
     ],
     challenges: [
       'ユーザーの多様な条件を効率的にマッチングするアルゴリズムの設計',
@@ -111,8 +111,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       '/images/projects/minitask.png',
-      '/images/projects/minitask.png',
-      '/images/projects/minitask.png'
+      // '/images/projects/minitask.png',
+      // '/images/projects/minitask.png'
     ],
     challenges: [
       '逆境モードのバランス調整（難しすぎず、簡単すぎない設定）',
@@ -167,8 +167,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       '/images/projects/ai-stream.png',
-      '/images/projects/ai-stream.png',
-      '/images/projects/ai-stream.png'
+      // '/images/projects/ai-stream.png',
+      // '/images/projects/ai-stream.png'
     ],
     challenges: [
       'リアルタイム映像・音声処理の最適化',
@@ -221,8 +221,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       '/images/projects/portfolio.png',
-      '/images/projects/portfolio.png',
-      '/images/projects/portfolio.png'
+      // '/images/projects/portfolio.png',
+      // '/images/projects/portfolio.png'
     ],
     challenges: [
       'パフォーマンスとアニメーションのバランス',
@@ -276,9 +276,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       '/images/projects/recomate.png',
-      '/images/projects/recomate.png',
-      '/images/projects/recomate.png'
-    ],
+      // '/images/projects/recomate.png',
+      // '/images/projects/recomate.png'    ],
     challenges: [
       'ElectronとPythonの統合',
       'ローカルでのAI処理最適化',
@@ -330,8 +329,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       '/images/projects/muu.png',
-      '/images/projects/muu.png',
-      '/images/projects/muu.png'
+      // '/images/projects/muu.png',
+      // '/images/projects/muu.png'
     ],
     challenges: [
       '匿名性とアカウンタビリティのバランス',
