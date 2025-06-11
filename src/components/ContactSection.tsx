@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, X } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ const ContactSection: React.FC = () => {
       link: 'mailto:yastar.tkm83@gmail.com'
     },
     {
-      icon: <Phone className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
+      icon: <X className="h-6 w-6 text-blue-600 dark:text-blue-400" />,
       title: 'X',
       content: '@YaSut0ra94970',
       link: 'https://x.com/YaSut0ra94970'
@@ -62,7 +62,7 @@ const ContactSection: React.FC = () => {
           </h2>
           <div className="w-16 h-1 bg-blue-600 dark:bg-blue-400 mx-auto mt-4 rounded-full"></div>
           <p className="text-gray-700 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
-            Have a question or want to work together? Feel free to get in touch with me.
+            ご質問やご意見があれば、お気軽にご連絡ください。
           </p>
         </div>
         
@@ -85,11 +85,11 @@ const ContactSection: React.FC = () => {
         <div className="bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-8 lg:p-12">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send Me a Message</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">お問い合わせ</h3>
               
               <form onSubmit={handleSubmit}>
                 <div className="mb-6">
-                  <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">Your Name</label>
+                  <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">お名前</label>
                   <input 
                     type="text" 
                     id="name" 
@@ -98,12 +98,12 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange} 
                     required 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
-                    placeholder="John Doe"
+                    placeholder="山田太郎"
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 mb-2">Your Email</label>
+                  <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 mb-2">メールアドレス</label>
                   <input 
                     type="email" 
                     id="email" 
@@ -112,12 +112,12 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange} 
                     required 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
-                    placeholder="john@example.com"
+                    placeholder="yamada@example.com"
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="subject" className="block text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                  <label htmlFor="subject" className="block text-gray-700 dark:text-gray-300 mb-2">件名</label>
                   <input 
                     type="text" 
                     id="subject" 
@@ -126,12 +126,12 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange} 
                     required 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
-                    placeholder="Project Inquiry"
+                    placeholder="件名"
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 mb-2">Your Message</label>
+                  <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 mb-2">お問い合わせ内容</label>
                   <textarea 
                     id="message" 
                     name="message" 
@@ -140,7 +140,7 @@ const ContactSection: React.FC = () => {
                     required 
                     rows={5} 
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
-                    placeholder="Hello, I'm interested in working with you..."
+                    placeholder="お問い合わせ内容をご記入ください。"
                   ></textarea>
                 </div>
                 
