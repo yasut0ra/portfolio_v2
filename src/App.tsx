@@ -9,19 +9,25 @@ import ResearchPage from './pages/ResearchPage';
 import BanditPlayground from './pages/BanditPlayground';
 import Footer from './components/Footer';
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
+const getInitialDarkMode = () => {
+  if (typeof window === 'undefined') {
+    return true;
+  }
 
-  useEffect(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedMode !== null) {
-      setDarkMode(savedMode === 'true');
-    } else if (prefersDark) {
-      setDarkMode(true);
-    }
-  }, []);
+  const savedMode = localStorage.getItem('darkMode');
+  const initial = savedMode !== null ? savedMode === 'true' : true;
+
+  if (initial) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+
+  return initial;
+};
+
+function App() {
+  const [darkMode, setDarkMode] = useState(getInitialDarkMode);
 
   useEffect(() => {
     localStorage.setItem('darkMode', darkMode.toString());
