@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
@@ -26,6 +26,19 @@ const getInitialDarkMode = () => {
   return initial;
 };
 
+const ScrollToTop: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto'
+    });
+  }, [location.pathname]);
+
+  return null;
+};
+
 function App() {
   const [darkMode, setDarkMode] = useState(getInitialDarkMode);
 
@@ -44,6 +57,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
         <div className="fixed inset-0 bg-pattern pointer-events-none"></div>
         <div className="fixed inset-0 bg-grid pointer-events-none"></div>
