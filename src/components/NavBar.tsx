@@ -58,14 +58,14 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
     }
   };
 
-  const navLinks = location.pathname === '/' ? [
+  const isHome = location.pathname === '/';
+
+  const sectionLinks = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' }
-  ] : [
-    { to: '/', label: 'Home' }
   ];
 
   const pageLinks = [
@@ -98,21 +98,26 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
           
           {/* Desktop menu */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-1">
-              {location.pathname === '/' ? (
-                navLinks.map(link => (
-                  <button
-                    key={link.id}
-                    onClick={() => scrollTo(link.id)}
-                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                      activeSection === link.id
-                        ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                ))
+            <div className="ml-10 flex items-center space-x-4">
+              {isHome ? (
+                <div className="flex items-center space-x-1">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mr-2">
+                    In-page
+                  </span>
+                  {sectionLinks.map(link => (
+                    <button
+                      key={link.id}
+                      onClick={() => scrollTo(link.id)}
+                      className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                        activeSection === link.id
+                          ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                          : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+                      }`}
+                    >
+                      {link.label}
+                    </button>
+                  ))}
+                </div>
               ) : (
                 <Link
                   to="/"
@@ -121,19 +126,27 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
                   Back to Home
                 </Link>
               )}
-              {pageLinks.map(link => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                    location.pathname === link.to
-                      ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+
+              <div className="h-6 w-px bg-gray-200/70 dark:bg-gray-700/70"></div>
+
+              <div className="flex items-center space-x-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mr-2">
+                  Pages
+                </span>
+                {pageLinks.map(link => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                      location.pathname === link.to
+                        ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
               <div className="ml-4">
                 <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
               </div>
@@ -158,20 +171,25 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
         isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 invisible'
       }`}>
         <div className="px-4 pt-2 pb-6 space-y-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-t border-gray-200/50 dark:border-gray-700/50">
-          {location.pathname === '/' ? (
-            navLinks.map(link => (
-              <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className={`block w-full text-left px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
-                  activeSection === link.id
-                    ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
-                }`}
-              >
-                {link.label}
-              </button>
-            ))
+          {isHome ? (
+            <>
+              <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 px-4">
+                このページ内
+              </p>
+              {sectionLinks.map(link => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollTo(link.id)}
+                  className={`block w-full text-left px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
+                    activeSection === link.id
+                      ? 'text-white bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+                  }`}
+                >
+                  {link.label}
+                </button>
+              ))}
+            </>
           ) : (
             <Link
               to="/"
@@ -180,6 +198,10 @@ const NavBar: React.FC<NavBarProps> = ({ darkMode, toggleDarkMode }) => {
               Back to Home
             </Link>
           )}
+
+          <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 px-4 pt-4">
+            独立ページ
+          </p>
           {pageLinks.map(link => (
             <Link
               key={link.to}
