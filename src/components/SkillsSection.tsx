@@ -1,9 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import type { LucideIcon } from 'lucide-react';
+import {
+  Activity,
+  Atom,
+  Clapperboard,
+  Cloud,
+  Code2,
+  Cylinder,
+  Database,
+  DatabaseZap,
+  Flame,
+  Github,
+  GitBranch,
+  Infinity,
+  Layers,
+  Link2,
+  NotebookPen,
+  PenTool,
+  ScatterChart,
+  ServerCog,
+  Ship,
+  Sparkles,
+  Target,
+  Wind,
+  Workflow,
+  Zap,
+} from 'lucide-react';
 
 interface TechItem {
   name: string;
-  icon: string;
+  Icon: LucideIcon;
+  iconClass: string;
 }
 
 interface TechCategory {
@@ -23,12 +51,12 @@ const categories: TechCategory[] = [
     accent: 'from-blue-500 to-purple-500',
     color: 'text-blue-600 dark:text-blue-400',
     items: [
-      { name: 'React', icon: '⚛️' },
-      { name: 'Next.js', icon: '⛓️' },
-      { name: 'TypeScript', icon: '📘' },
-      { name: 'Tailwind CSS', icon: '💨' },
-      { name: 'Framer Motion', icon: '🎞️' },
-      { name: 'Vite', icon: '⚡' },
+      { name: 'React', Icon: Atom, iconClass: 'text-blue-600 dark:text-blue-300' },
+      { name: 'Next.js', Icon: Infinity, iconClass: 'text-slate-700 dark:text-gray-300' },
+      { name: 'TypeScript', Icon: Code2, iconClass: 'text-sky-600 dark:text-sky-300' },
+      { name: 'Tailwind CSS', Icon: Wind, iconClass: 'text-cyan-500 dark:text-cyan-300' },
+      { name: 'Framer Motion', Icon: Clapperboard, iconClass: 'text-purple-500 dark:text-purple-300' },
+      { name: 'Vite', Icon: Zap, iconClass: 'text-amber-500 dark:text-amber-300' },
     ],
   },
   {
@@ -38,12 +66,12 @@ const categories: TechCategory[] = [
     accent: 'from-green-500 to-emerald-500',
     color: 'text-green-600 dark:text-green-400',
     items: [
-      { name: 'Node.js', icon: '🚀' },
-      { name: 'Express', icon: '🌐' },
-      { name: 'FastAPI', icon: '⚡' },
-      { name: 'Python', icon: '🐍' },
-      { name: 'MongoDB', icon: '🍃' },
-      { name: 'PostgreSQL', icon: '🐘' },
+      { name: 'Node.js', Icon: ServerCog, iconClass: 'text-emerald-600 dark:text-emerald-300' },
+      { name: 'Express', Icon: GitBranch, iconClass: 'text-gray-600 dark:text-gray-300' },
+      { name: 'FastAPI', Icon: Activity, iconClass: 'text-teal-500 dark:text-teal-300' },
+      { name: 'Python', Icon: Workflow, iconClass: 'text-yellow-500 dark:text-yellow-300' },
+      { name: 'MongoDB', Icon: Database, iconClass: 'text-green-600 dark:text-green-300' },
+      { name: 'PostgreSQL', Icon: Cylinder, iconClass: 'text-indigo-500 dark:text-indigo-300' },
     ],
   },
   {
@@ -53,12 +81,12 @@ const categories: TechCategory[] = [
     accent: 'from-purple-500 to-pink-500',
     color: 'text-purple-600 dark:text-purple-400',
     items: [
-      { name: 'PyTorch', icon: '🔥' },
-      { name: 'TensorFlow', icon: '🤖' },
-      { name: 'scikit-learn', icon: '📊' },
-      { name: 'Bandit Algos', icon: '🎰' },
-      { name: 'OpenAI API', icon: '🧠' },
-      { name: 'LangChain', icon: '⛓️' },
+      { name: 'PyTorch', Icon: Flame, iconClass: 'text-orange-500 dark:text-orange-300' },
+      { name: 'TensorFlow', Icon: Layers, iconClass: 'text-yellow-500 dark:text-yellow-300' },
+      { name: 'scikit-learn', Icon: ScatterChart, iconClass: 'text-pink-500 dark:text-pink-300' },
+      { name: 'Bandit Algos', Icon: Target, iconClass: 'text-rose-500 dark:text-rose-300' },
+      { name: 'OpenAI API', Icon: Sparkles, iconClass: 'text-purple-500 dark:text-purple-300' },
+      { name: 'LangChain', Icon: Link2, iconClass: 'text-blue-500 dark:text-blue-300' },
     ],
   },
   {
@@ -68,12 +96,12 @@ const categories: TechCategory[] = [
     accent: 'from-amber-500 to-orange-500',
     color: 'text-amber-600 dark:text-amber-400',
     items: [
-      { name: 'GitHub', icon: '🐙' },
-      { name: 'Docker', icon: '🐳' },
-      { name: 'Supabase', icon: '🪄' },
-      { name: 'AWS', icon: '☁️' },
-      { name: 'Figma', icon: '🎨' },
-      { name: 'Notion', icon: '🗂️' },
+      { name: 'GitHub', Icon: Github, iconClass: 'text-gray-800 dark:text-gray-100' },
+      { name: 'Docker', Icon: Ship, iconClass: 'text-sky-500 dark:text-sky-300' },
+      { name: 'Supabase', Icon: DatabaseZap, iconClass: 'text-emerald-500 dark:text-emerald-300' },
+      { name: 'AWS', Icon: Cloud, iconClass: 'text-amber-500 dark:text-amber-300' },
+      { name: 'Figma', Icon: PenTool, iconClass: 'text-pink-500 dark:text-pink-300' },
+      { name: 'Notion', Icon: NotebookPen, iconClass: 'text-slate-600 dark:text-slate-300' },
     ],
   },
 ];
@@ -154,7 +182,9 @@ const SkillsSection: React.FC = () => {
                     className="group bg-white/90 dark:bg-gray-700/70 border border-gray-200/50 dark:border-gray-600/50 rounded-xl p-4 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300"
                     whileHover={{ y: -4, scale: 1.02 }}
                   >
-                    <span className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                    <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 group-hover:scale-105 transition-transform duration-300">
+                      <item.Icon className={`h-6 w-6 ${item.iconClass}`} />
+                    </div>
                     <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{item.name}</span>
                   </motion.div>
                 ))}
