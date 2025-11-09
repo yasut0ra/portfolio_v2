@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Users, Calendar, FileText, ExternalLink, Award, Play, Brain, Target, Zap, Lightbulb, TrendingUp, Database } from 'lucide-react';
+import { BookOpen, Users, Calendar, FileText, ExternalLink, Play, Brain, Target, Zap, Lightbulb, TrendingUp, Database, Cpu, FlaskConical, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Publication {
@@ -21,6 +21,19 @@ interface ResearchInterest {
   icon: React.ReactNode;
   color: string;
   details: string[];
+}
+
+interface ResearchDemo {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  icon: React.ReactNode;
+  status: 'live' | 'beta' | 'coming-soon';
+  highlight: string;
+  gradient: string;
+  link?: string;
+  linkType?: 'internal' | 'external';
 }
 
 const ResearchPage: React.FC = () => {
@@ -78,6 +91,72 @@ const ResearchPage: React.FC = () => {
     }
   ];
 
+  const researchDemos: ResearchDemo[] = [
+    {
+      id: 'bandit-playground',
+      title: 'Multi-Armed Bandit Playground',
+      description: 'バンディットアルゴリズムのリアルタイムシミュレーション環境。ε-GreedyやUCB1などを可視化しながら比較できます。',
+      tags: ['ε-Greedy', 'UCB1', 'Thompson Sampling'],
+      icon: <Play className="h-16 w-16 text-white group-hover:scale-110 transition-transform duration-300" />,
+      status: 'live',
+      highlight: 'Live Demo',
+      gradient: 'from-blue-600 to-purple-600',
+      link: '/bandit-playground',
+      linkType: 'internal'
+    },
+    {
+      id: 'contextual-sandbox',
+      title: 'Contextual Recommender Sandbox',
+      description: 'ログデータを再生しながら、特徴量ごとのアーム選択や報酬を解析できる可視化ツール。セグメント別の寄与度を確認できます。',
+      tags: ['Contextual', 'Offline RL', 'Visualization'],
+      icon: <Cpu className="h-14 w-14 text-white" />,
+      status: 'live',
+      highlight: 'Sandbox',
+      gradient: 'from-emerald-500 to-teal-500',
+      link: '/research/contextual-sandbox',
+      linkType: 'internal'
+    },
+    {
+      id: 'offline-evaluator',
+      title: 'Offline Policy Evaluator',
+      description: 'IPSやDoubly Robust法を用いたオフライン政策評価パイプライン。安全指標と分散を即時チェックできます。',
+      tags: ['IPS', 'DR', 'Counterfactual'],
+      icon: <FlaskConical className="h-14 w-14 text-white" />,
+      status: 'beta',
+      highlight: 'Evaluator',
+      gradient: 'from-slate-700 to-gray-900',
+      link: '/research/offline-evaluator',
+      linkType: 'internal'
+    },
+    {
+      id: 'conversational-agent',
+      title: 'Conversational Bandit Agent',
+      description: '音声・感情解析とバンディット制御を組み合わせた対話型エージェント。ペルソナ切り替えをシミュレーションできます。',
+      tags: ['Speech', 'Emotion', 'Bandit'],
+      icon: <Sparkles className="h-14 w-14 text-white" />,
+      status: 'beta',
+      highlight: 'Prototype',
+      gradient: 'from-rose-500 to-orange-500',
+      link: '/research/conversational-agent',
+      linkType: 'internal'
+    }
+  ];
+
+  const statusStyles: Record<ResearchDemo['status'], { label: string; classes: string }> = {
+    live: {
+      label: 'Live',
+      classes: 'bg-green-100 text-green-800 dark:bg-green-900/60 dark:text-green-200'
+    },
+    beta: {
+      label: 'Beta',
+      classes: 'bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200'
+    },
+    'coming-soon': {
+      label: 'Coming Soon',
+      classes: 'bg-gray-200 text-gray-700 dark:bg-gray-700/70 dark:text-gray-200'
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'published':
@@ -130,52 +209,70 @@ const ResearchPage: React.FC = () => {
             インタラクティブ <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">デモ</span>
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Link
-              to="/bandit-playground"
-              className="group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50"
-            >
-              <div className="relative h-48 bg-gradient-to-br from-blue-600 to-purple-600 overflow-hidden">
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Play className="h-16 w-16 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-medium">
-                  Live Demo
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  Multi-Armed Bandit Playground
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  バンディットアルゴリズムのリアルタイムシミュレーション環境。ε-GreedyやUCB1などの様々なアルゴリズムを視覚的に比較・検証できます。
-                </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {['ε-Greedy', 'UCB1', 'Thompson Sampling'].map((tag, index) => (
-                    <span key={index} className="text-xs font-medium bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
+            {researchDemos.map(demo => {
+              const status = statusStyles[demo.status];
 
-            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-gray-400 to-gray-500 rounded-xl flex items-center justify-center text-white mx-auto mb-4">
-                  <FileText className="h-8 w-8" />
+              const cardContent = (
+                <>
+                  <div className={`relative h-48 bg-gradient-to-br ${demo.gradient} overflow-hidden`}>
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+                      {demo.icon}
+                      <span className="mt-3 text-sm font-semibold tracking-wide">{demo.highlight}</span>
+                    </div>
+                    <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm font-medium">
+                      {status.label}
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {demo.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                      {demo.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {demo.tags.map(tag => (
+                        <span key={tag} className="text-xs font-medium bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              );
+
+              const baseClass =
+                'group bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50';
+
+              if (demo.link) {
+                if (demo.linkType === 'external') {
+                  return (
+                    <a
+                      key={demo.id}
+                      href={demo.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={baseClass}
+                    >
+                      {cardContent}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link key={demo.id} to={demo.link} className={baseClass}>
+                    {cardContent}
+                  </Link>
+                );
+              }
+
+              return (
+                <div key={demo.id} className={`${baseClass} cursor-default`}>
+                  {cardContent}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                  推薦システムデモ
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  現在開発中の推薦システムデモ。完成次第公開予定です。
-                </p>
-                <span className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-4 py-2 rounded-full text-sm font-medium">
-                  Coming Soon
-                </span>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </section>
 

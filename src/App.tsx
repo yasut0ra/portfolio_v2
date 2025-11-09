@@ -6,6 +6,9 @@ import ProfilePage from './pages/ProfilePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import BlogPage from './pages/BlogPage';
 import ResearchPage from './pages/ResearchPage';
+import ContextualSandboxPage from './pages/ContextualSandboxPage';
+import OfflineEvaluatorPage from './pages/OfflineEvaluatorPage';
+import ConversationalAgentPage from './pages/ConversationalAgentPage';
 import BanditPlayground from './pages/BanditPlayground';
 import Footer from './components/Footer';
 
@@ -69,6 +72,9 @@ function App() {
             <Route path="/project/:id" element={<ProjectDetailPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/research" element={<ResearchPage />} />
+            <Route path="/research/contextual-sandbox" element={<ContextualSandboxPage />} />
+            <Route path="/research/offline-evaluator" element={<OfflineEvaluatorPage />} />
+            <Route path="/research/conversational-agent" element={<ConversationalAgentPage />} />
             <Route path="/bandit-playground" element={<BanditPlayground />} />
           </Routes>
           <Footer />
