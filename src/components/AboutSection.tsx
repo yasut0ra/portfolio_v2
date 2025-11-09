@@ -78,18 +78,7 @@ const AboutSection: React.FC = () => {
               ))}
             </div>
             
-            <div className="pt-4">
-              <a 
-                href="#" 
-                className="group inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
-              >
-                <FileText className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-                Download CV
-                <div className="ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-                  →
-                </div>
-              </a>
-            </div>
+            {/* CV ボタンは未実装のため非表示 */}
           </div>
         </div>
       </div>
