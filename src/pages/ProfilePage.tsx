@@ -66,6 +66,12 @@ const ProfilePage: React.FC = () => {
       color: 'from-yellow-500 to-orange-500'
     },
     {
+      name: '統計検定準１級',
+      year: '2025',
+      icon: <Award className="h-6 w-6" />,
+      color: 'from-blue-500 to-indigo-500'
+    },
+    {
       name: 'TOEIC 780点',
       year: '2025',
       icon: <Star className="h-6 w-6" />,
