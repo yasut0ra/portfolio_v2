@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, Send, Phone, MessageCircle, User, FileText } from 'lucide-react';
 
+const CONTACT_EMAIL = 'yastar.tkm83@gmail.com';
+const createInitialFormState = () => ({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+});
+
 const ContactSection: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState(createInitialFormState());
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -17,24 +21,44 @@ const ContactSection: React.FC = () => {
       ...prevData,
       [name]: value
     }));
+    setFeedback(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const buildMailtoLink = () => {
+    const subject = encodeURIComponent(`[Portfolio Contact] ${formData.subject}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+    );
+    return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Form submitted:', formData);
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-    setIsSubmitting(false);
-    alert('Thank you for your message! I will get back to you soon.');
+
+    try {
+      const mailtoLink = buildMailtoLink();
+
+      if (typeof window !== 'undefined') {
+        window.location.href = mailtoLink;
+      } else {
+        throw new Error('Mail client unavailable');
+      }
+
+      setFeedback({
+        type: 'success',
+        message: `メール作成画面が開きます。開かない場合は ${CONTACT_EMAIL} まで直接ご連絡ください。`
+      });
+      setFormData(createInitialFormState());
+    } catch (error) {
+      console.error('Failed to trigger mail client', error);
+      setFeedback({
+        type: 'error',
+        message: `メールリンクを開けませんでした。${CONTACT_EMAIL} まで直接ご連絡ください。`
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -180,6 +204,17 @@ const ContactSection: React.FC = () => {
                     </>
                   )}
                 </button>
+                {feedback && (
+                  <p
+                    className={`text-sm font-semibold text-center ${
+                      feedback.type === 'success'
+                        ? 'text-emerald-600 dark:text-emerald-400'
+                        : 'text-red-600 dark:text-red-400'
+                    }`}
+                  >
+                    {feedback.message}
+                  </p>
+                )}
               </form>
             </div>
             

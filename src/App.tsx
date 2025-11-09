@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
@@ -9,19 +9,38 @@ import ResearchPage from './pages/ResearchPage';
 import BanditPlayground from './pages/BanditPlayground';
 import Footer from './components/Footer';
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
+const getInitialDarkMode = () => {
+  if (typeof window === 'undefined') {
+    return true;
+  }
+
+  const savedMode = localStorage.getItem('darkMode');
+  const initial = savedMode !== null ? savedMode === 'true' : true;
+
+  if (initial) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+
+  return initial;
+};
+
+const ScrollToTop: React.FC = () => {
+  const location = useLocation();
 
   useEffect(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedMode !== null) {
-      setDarkMode(savedMode === 'true');
-    } else if (prefersDark) {
-      setDarkMode(true);
-    }
-  }, []);
+    window.scrollTo({
+      top: 0,
+      behavior: 'auto'
+    });
+  }, [location.pathname]);
+
+  return null;
+};
+
+function App() {
+  const [darkMode, setDarkMode] = useState(getInitialDarkMode);
 
   useEffect(() => {
     localStorage.setItem('darkMode', darkMode.toString());
@@ -38,6 +57,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
         <div className="fixed inset-0 bg-pattern pointer-events-none"></div>
         <div className="fixed inset-0 bg-grid pointer-events-none"></div>
