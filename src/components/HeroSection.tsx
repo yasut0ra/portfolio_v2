@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github as GitHub, Linkedin, Mail, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Sparkles } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   const scrollToNextSection = () => {
@@ -13,72 +13,72 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-      {/* Enhanced gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/90 via-white to-purple-50/90 dark:from-gray-900/95 dark:via-gray-800/95 dark:to-blue-900/95 backdrop-blur-sm z-0"></div>
-      
-      {/* Enhanced animated background elements */}
-      <div className="absolute top-32 left-10 w-72 h-72 bg-gradient-to-r from-blue-200/60 to-cyan-200/60 dark:from-blue-900/30 dark:to-cyan-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob"></div>
-      <div className="absolute top-52 right-10 w-80 h-80 bg-gradient-to-r from-purple-200/60 to-pink-200/60 dark:from-purple-900/30 dark:to-pink-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-8 left-20 w-80 h-80 bg-gradient-to-r from-pink-200/60 to-rose-200/60 dark:from-pink-900/30 dark:to-rose-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-4000"></div>
-      <div className="absolute bottom-52 right-20 w-72 h-72 bg-gradient-to-r from-teal-200/60 to-emerald-200/60 dark:from-teal-900/30 dark:to-emerald-900/30 rounded-full mix-blend-multiply dark:mix-blend-overlay filter blur-3xl opacity-80 animate-blob animation-delay-6000"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="text-center">
-          <div className="mb-8">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
-              <span className="block mb-2">Hello, I'm</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-blue-400 dark:via-purple-400 dark:to-blue-300 animate-pulse">
-                Yasut0ra
-              </span>
-            </h1>
-            
-            <div className="h-16 flex items-center justify-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl text-gray-700 dark:text-gray-300 font-medium">
-                <span className="typing-text">Full Stack Developer</span>
-              </h2>
-            </div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-light-bg dark:bg-dark-bg transition-colors duration-300">
+        <div className="absolute inset-0 bg-hero-pattern opacity-[0.03] dark:opacity-[0.05]"></div>
+        {/* Gradient Blobs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-400/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl animate-blob"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-secondary-400/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-pink-400/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 backdrop-blur-sm mb-8 animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
+            <Sparkles className="w-4 h-4 text-primary-500" />
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Open for new opportunities</span>
           </div>
-          
-          <div className="max-w-3xl mx-auto mb-12">
-            <p className="text-gray-600 dark:text-gray-400 text-lg sm:text-xl leading-relaxed">
-              現実の課題を解決する、<br className="sm:hidden" />
-              <span className="font-semibold text-gray-800 dark:text-gray-200">美しく・機能的で・ユーザーフレンドリー</span>な<br/>アプリケーションを開発することに情熱を注いでいます。<br />
-              現在は <span className="font-semibold text-blue-600 dark:text-blue-400">推薦システム × バンディットアルゴリズム</span> の研究に取り組んでおり、<br />
-              将来は <span className="font-semibold text-purple-600 dark:text-purple-400">AI開発のリーダー</span> を目指しています。
-            </p>
+
+          {/* Main Heading */}
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-8 animate-slide-up opacity-0" style={{ animationDelay: '0.2s' }}>
+            <span className="block text-gray-900 dark:text-white mb-2">Hello, I'm</span>
+            <span className="text-gradient">Yasut0ra</span>
+          </h1>
+
+          {/* Subheading / Typing Effect */}
+          <div className="h-12 mb-8 flex items-center justify-center animate-slide-up opacity-0" style={{ animationDelay: '0.3s' }}>
+            <span className="text-xl sm:text-2xl md:text-3xl text-gray-600 dark:text-gray-400 font-light">
+              <span className="typing-text">Full Stack Developer & Researcher</span>
+            </span>
           </div>
-          
-          <div className="flex justify-center space-x-6 mb-16">
-            <a 
-              href="https://github.com/yasut0ra" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
-            >
-              <GitHub className="h-7 w-7 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/takuma-yasuda-7a332533b/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="group p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
-            >
-              <Linkedin className="h-7 w-7 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
-            </a>
-            <a 
-              href="mailto:yastar.tkm83@gmail.com" 
-              className="group p-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-200/50 dark:border-gray-700/50"
-            >
-              <Mail className="h-7 w-7 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
-            </a>
+
+          {/* Description */}
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-12 max-w-2xl mx-auto animate-slide-up opacity-0" style={{ animationDelay: '0.4s' }}>
+            Crafting <span className="text-gray-900 dark:text-white font-medium">beautiful</span>, <span className="text-gray-900 dark:text-white font-medium">functional</span>, and <span className="text-gray-900 dark:text-white font-medium">user-centric</span> digital experiences.
+            Specializing in <span className="text-primary-600 dark:text-primary-400">Bandit Algorithms</span> and <span className="text-secondary-600 dark:text-secondary-400">Recommendation Systems</span>.
+          </p>
+
+          {/* Social Links */}
+          <div className="flex items-center justify-center gap-6 mb-16 animate-slide-up opacity-0" style={{ animationDelay: '0.5s' }}>
+            {[
+              { icon: Github, href: "https://github.com/yasut0ra", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/takuma-yasuda-7a332533b/", label: "LinkedIn" },
+              { icon: Mail, href: "mailto:yastar.tkm83@gmail.com", label: "Email" }
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target={social.href.startsWith('mailto') ? undefined : "_blank"}
+                rel={social.href.startsWith('mailto') ? undefined : "noopener noreferrer"}
+                className="p-4 rounded-2xl bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/10 hover:scale-110 hover:shadow-lg transition-all duration-300 group"
+                aria-label={social.label}
+              >
+                <social.icon className="w-6 h-6 text-gray-600 dark:text-gray-400 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors" />
+              </a>
+            ))}
           </div>
-          
-          <button 
-            onClick={scrollToNextSection} 
-            className="group animate-bounce bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-3 rounded-full shadow-lg hover:shadow-xl border border-gray-200/50 dark:border-gray-700/50 transition-all duration-300"
+
+          {/* Scroll Indicator */}
+          <button
+            onClick={scrollToNextSection}
+            className="animate-bounce p-3 rounded-full bg-white/50 dark:bg-white/5 border border-gray-200/50 dark:border-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/10 transition-all duration-300 animate-fade-in opacity-0"
+            style={{ animationDelay: '1s' }}
+            aria-label="Scroll to next section"
           >
-            <ArrowDown className="h-6 w-6 text-blue-600 dark:text-blue-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300" />
+            <ArrowDown className="w-6 h-6 text-gray-500 dark:text-gray-400" />
           </button>
         </div>
       </div>
