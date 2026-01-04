@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Users, Calendar, FileText, ExternalLink, Play, Brain, Target, Zap, Lightbulb, TrendingUp, Database, Cpu, FlaskConical, Sparkles } from 'lucide-react';
+import { BookOpen, Users, Calendar, FileText, ExternalLink, Play, Brain, Target, Zap, Lightbulb, TrendingUp, Database, Cpu, FlaskConical, Sparkles, ListOrdered } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Publication {
@@ -102,6 +102,18 @@ const ResearchPage: React.FC = () => {
       highlight: 'Live Demo',
       gradient: 'from-blue-600 to-purple-600',
       link: '/bandit-playground',
+      linkType: 'internal'
+    },
+    {
+      id: 'ranking-bandit-carousel',
+      title: 'Ranking Bandit Carousel',
+      description: 'Carousel UI向けのランキングバンディット。Cascade feedbackと位置バイアスを使ってCTRを最適化します。',
+      tags: ['Ranking Bandit', 'Cascade', 'Position Bias', 'Carousel'],
+      icon: <ListOrdered className="h-14 w-14 text-white" />,
+      status: 'live',
+      highlight: 'Carousel',
+      gradient: 'from-indigo-600 to-sky-600',
+      link: '/research/ranking-bandit-carousel',
       linkType: 'internal'
     },
     {
