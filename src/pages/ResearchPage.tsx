@@ -95,8 +95,8 @@ const ResearchPage: React.FC = () => {
     {
       id: 'bandit-playground',
       title: 'Multi-Armed Bandit Playground',
-      description: 'バンディットアルゴリズムのリアルタイムシミュレーション環境。ε-GreedyやUCB1などを可視化しながら比較できます。',
-      tags: ['ε-Greedy', 'UCB1', 'Thompson Sampling'],
+      description: '実験プロトコルと学習曲線を含むバンディットシミュレーション。探索率やノイズを変えながらリグレットの挙動を比較できます。',
+      tags: ['ε-Greedy', 'UCB1', 'Regret', 'Learning Curves'],
       icon: <Play className="h-16 w-16 text-white group-hover:scale-110 transition-transform duration-300" />,
       status: 'live',
       highlight: 'Live Demo',
@@ -107,8 +107,8 @@ const ResearchPage: React.FC = () => {
     {
       id: 'contextual-sandbox',
       title: 'Contextual Recommender Sandbox',
-      description: 'ログデータを再生しながら、特徴量ごとのアーム選択や報酬を解析できる可視化ツール。セグメント別の寄与度を確認できます。',
-      tags: ['Contextual', 'Offline RL', 'Visualization'],
+      description: '特徴量の摂動とオフライン評価を試せるサンドボックス。IPS/DR指標でポリシーの信頼度を検証できます。',
+      tags: ['Contextual', 'IPS', 'Doubly Robust', 'Counterfactual'],
       icon: <Cpu className="h-14 w-14 text-white" />,
       status: 'live',
       highlight: 'Sandbox',
