@@ -10,6 +10,7 @@ import ContextualSandboxPage from './pages/ContextualSandboxPage';
 import OfflineEvaluatorPage from './pages/OfflineEvaluatorPage';
 import ConversationalAgentPage from './pages/ConversationalAgentPage';
 import BanditPlayground from './pages/BanditPlayground';
+import RankingBanditCarouselPage from './pages/RankingBanditCarouselPage';
 import Footer from './components/Footer';
 
 const getInitialDarkMode = () => {
@@ -75,6 +76,7 @@ function App() {
             <Route path="/research/contextual-sandbox" element={<ContextualSandboxPage />} />
             <Route path="/research/offline-evaluator" element={<OfflineEvaluatorPage />} />
             <Route path="/research/conversational-agent" element={<ConversationalAgentPage />} />
+            <Route path="/research/ranking-bandit-carousel" element={<RankingBanditCarouselPage />} />
             <Route path="/bandit-playground" element={<BanditPlayground />} />
           </Routes>
           <Footer />

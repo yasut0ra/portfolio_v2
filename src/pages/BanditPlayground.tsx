@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { ArrowLeft, Play, Pause, RefreshCw, BarChart, Info, Settings, TrendingUp, Target, Brain, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -20,11 +20,57 @@ interface AlgorithmStats {
   averageReward: number;
 }
 
+const armPresetOptions = [
+  {
+    id: 'random',
+    label: 'Random Uniform',
+    description: '各アームの真の確率を一様分布からサンプリング',
+  },
+  {
+    id: 'clustered',
+    label: 'Clustered Difficulty',
+    description: '0.45〜0.55 に集中した接戦環境',
+  },
+  {
+    id: 'sparse',
+    label: 'Sparse Winner',
+    description: '1本だけ高確率のアームが存在',
+  },
+  {
+    id: 'ladder',
+    label: 'Ladder',
+    description: '確率が段階的に増加する階段型',
+  },
+];
+
+const generateProbabilities = (preset: string, count: number) => {
+  const clamp = (value: number) => Math.min(0.98, Math.max(0.02, value));
+
+  if (preset === 'clustered') {
+    return Array.from({ length: count }, () => clamp(0.45 + Math.random() * 0.1));
+  }
+  if (preset === 'sparse') {
+    const probs = Array.from({ length: count }, () => clamp(0.15 + Math.random() * 0.1));
+    const winnerIndex = Math.floor(Math.random() * count);
+    probs[winnerIndex] = clamp(0.75 + Math.random() * 0.15);
+    return probs;
+  }
+  if (preset === 'ladder') {
+    const base = 0.2;
+    const step = 0.6 / Math.max(1, count - 1);
+    return Array.from({ length: count }, (_, index) => clamp(base + step * index));
+  }
+  return Array.from({ length: count }, () => clamp(Math.random()));
+};
+
 const BanditPlayground: React.FC = () => {
   const [arms, setArms] = useState<Arm[]>([]);
   const [totalPlays, setTotalPlays] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(500);
+  const [armCount, setArmCount] = useState(5);
+  const [armPreset, setArmPreset] = useState('random');
+  const [rewardNoise, setRewardNoise] = useState(0.05);
   const [algorithm, setAlgorithm] = useState<'epsilon-greedy' | 'ucb1' | 'thompson-sampling'>('epsilon-greedy');
   const [epsilon, setEpsilon] = useState(0.1);
   const [c, setC] = useState(2); // UCB1 confidence parameter
@@ -35,17 +81,15 @@ const BanditPlayground: React.FC = () => {
     averageReward: 0
   });
   const [rewardHistory, setRewardHistory] = useState<number[]>([]);
+  const [regretHistory, setRegretHistory] = useState<number[]>([]);
   const [selectedArmHistory, setSelectedArmHistory] = useState<number[]>([]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    resetBandit();
-  }, []);
-
-  const resetBandit = () => {
-    const newArms = Array.from({ length: 5 }, (_, i) => ({
-      id: i,
-      realProbability: Math.random(),
+  const resetBandit = useCallback(() => {
+    const probabilities = generateProbabilities(armPreset, armCount);
+    const newArms = probabilities.map((probability, index) => ({
+      id: index,
+      realProbability: probability,
       timesPlayed: 0,
       wins: 0,
       estimatedValue: 0,
@@ -63,11 +107,16 @@ const BanditPlayground: React.FC = () => {
       averageReward: 0
     });
     setRewardHistory([]);
+    setRegretHistory([]);
     setSelectedArmHistory([]);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-  };
+  }, [armCount, armPreset]);
+
+  useEffect(() => {
+    resetBandit();
+  }, [resetBandit]);
 
   const calculateUCB = (arm: Arm) => {
     if (arm.timesPlayed === 0) return Infinity;
@@ -120,7 +169,9 @@ const BanditPlayground: React.FC = () => {
   };
 
   const pullArm = (armId: number) => {
-    const win = Math.random() < arms[armId].realProbability;
+    const trueWin = Math.random() < arms[armId].realProbability;
+    const observationFlipped = Math.random() < rewardNoise;
+    const win = observationFlipped ? !trueWin : trueWin;
     const optimalArm = arms.reduce((best, current) => 
       current.realProbability > best.realProbability ? current : best
     );
@@ -158,6 +209,8 @@ const BanditPlayground: React.FC = () => {
         averageReward: newTotalReward / (totalPlays + 1)
       };
     });
+
+    setRegretHistory(prev => [...prev, (totalPlays + 1) * optimalArm.realProbability - (stats.totalReward + (win ? 1 : 0))]);
   };
 
   const toggleSimulation = () => {
@@ -209,6 +262,32 @@ const BanditPlayground: React.FC = () => {
     current.realProbability > best.realProbability ? current : best
   ) : null;
 
+  const rewardMovingAverage = useMemo(() => {
+    const windowSize = 12;
+    return rewardHistory.map((_, index) => {
+      const start = Math.max(0, index - windowSize + 1);
+      const slice = rewardHistory.slice(start, index + 1);
+      const total = slice.reduce((sum, value) => sum + value, 0);
+      return total / slice.length;
+    });
+  }, [rewardHistory]);
+
+  const buildSparkline = (values: number[], width: number, height: number) => {
+    if (values.length < 2) return '';
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = max - min || 1;
+    return values.map((value, index) => {
+      const x = (index / (values.length - 1)) * width;
+      const y = height - ((value - min) / range) * height;
+      return `${x},${y}`;
+    }).join(' ');
+  };
+
+  const rewardLine = useMemo(() => buildSparkline(rewardMovingAverage, 240, 80), [rewardMovingAverage]);
+  const regretLine = useMemo(() => buildSparkline(regretHistory, 240, 80), [regretHistory]);
+  const presetSummary = armPresetOptions.find(option => option.id === armPreset);
+
   return (
     <main className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto">
@@ -239,8 +318,8 @@ const BanditPlayground: React.FC = () => {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">シミュレーション設定</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+            <div className="lg:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 アルゴリズム
               </label>
@@ -257,7 +336,7 @@ const BanditPlayground: React.FC = () => {
             </div>
 
             {algorithm === 'epsilon-greedy' && (
-              <div>
+              <div className="lg:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Epsilon (ε)
                 </label>
@@ -275,7 +354,7 @@ const BanditPlayground: React.FC = () => {
             )}
 
             {algorithm === 'ucb1' && (
-              <div>
+              <div className="lg:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   信頼度パラメータ (c)
                 </label>
@@ -292,7 +371,7 @@ const BanditPlayground: React.FC = () => {
               </div>
             )}
 
-            <div>
+            <div className="lg:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 シミュレーション速度 (ms)
               </label>
@@ -307,7 +386,57 @@ const BanditPlayground: React.FC = () => {
               />
             </div>
 
-            <div className="flex items-end">
+            <div className="lg:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                アーム数
+              </label>
+              <input
+                type="number"
+                value={armCount}
+                onChange={(e) => setArmCount(Math.max(2, Math.min(10, Number(e.target.value))))}
+                disabled={isRunning}
+                min="2"
+                max="10"
+                step="1"
+                className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              />
+            </div>
+
+            <div className="lg:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                環境プリセット
+              </label>
+              <select
+                value={armPreset}
+                onChange={(e) => setArmPreset(e.target.value)}
+                disabled={isRunning}
+                className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              >
+                {armPresetOptions.map(option => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="lg:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                観測ノイズ率
+              </label>
+              <input
+                type="number"
+                value={rewardNoise}
+                onChange={(e) => setRewardNoise(Math.max(0, Math.min(0.3, Number(e.target.value))))}
+                disabled={isRunning}
+                min="0"
+                max="0.3"
+                step="0.01"
+                className="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+              />
+            </div>
+
+            <div className="flex items-end lg:col-span-2">
               <div className="flex gap-3 w-full">
                 <button
                   onClick={toggleSimulation}
@@ -338,6 +467,11 @@ const BanditPlayground: React.FC = () => {
               <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                 {getAlgorithmDescription()}
               </p>
+            </div>
+            <div className="mt-4 text-xs text-gray-600 dark:text-gray-400 flex flex-wrap gap-4">
+              <span>環境: {presetSummary?.label}</span>
+              <span>アーム数: {armCount}</span>
+              <span>観測ノイズ: {(rewardNoise * 100).toFixed(0)}%</span>
             </div>
           </div>
         </div>
@@ -521,6 +655,70 @@ const BanditPlayground: React.FC = () => {
               </div>
             </div>
 
+            {/* Learning Curves */}
+            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-200/50 dark:border-gray-700/50">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <Zap className="h-5 w-5 text-amber-500 mr-2" />
+                Learning Curves
+              </h3>
+              <div className="space-y-6">
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">
+                    Moving Avg Reward
+                  </div>
+                  <div className="w-full h-24 bg-gray-50 dark:bg-gray-700 rounded-xl p-3 border border-gray-200 dark:border-gray-600">
+                    {rewardLine ? (
+                      <svg width="100%" height="100%" viewBox="0 0 240 80" className="overflow-visible">
+                        <polyline
+                          fill="none"
+                          stroke="url(#rewardGradient)"
+                          strokeWidth="2"
+                          points={rewardLine}
+                        />
+                        <defs>
+                          <linearGradient id="rewardGradient" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#2563eb" />
+                            <stop offset="100%" stopColor="#7c3aed" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    ) : (
+                      <div className="text-xs text-gray-500 dark:text-gray-400 h-full flex items-center justify-center">
+                        データ待機中
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">
+                    Cumulative Regret
+                  </div>
+                  <div className="w-full h-24 bg-gray-50 dark:bg-gray-700 rounded-xl p-3 border border-gray-200 dark:border-gray-600">
+                    {regretLine ? (
+                      <svg width="100%" height="100%" viewBox="0 0 240 80" className="overflow-visible">
+                        <polyline
+                          fill="none"
+                          stroke="url(#regretGradient)"
+                          strokeWidth="2"
+                          points={regretLine}
+                        />
+                        <defs>
+                          <linearGradient id="regretGradient" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#f97316" />
+                            <stop offset="100%" stopColor="#ef4444" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    ) : (
+                      <div className="text-xs text-gray-500 dark:text-gray-400 h-full flex items-center justify-center">
+                        データ待機中
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Recent Activity */}
             <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-200/50 dark:border-gray-700/50">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
@@ -552,6 +750,50 @@ const BanditPlayground: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <section className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl p-6 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Problem Setup</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+              各アームはベルヌーイ分布の報酬を持つと仮定し、探索と活用のトレードオフを観察します。
+            </p>
+            <div className="rounded-xl bg-gray-50 dark:bg-gray-700 p-4 text-xs font-mono text-gray-700 dark:text-gray-200">
+              r_t ~ Bernoulli(μ_i)<br />
+              μ* = max_i μ_i
+            </div>
+          </div>
+
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl p-6 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Objective</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+              累積リグレットを最小化し、最適アームの選択率を最大化します。
+            </p>
+            <div className="rounded-xl bg-gray-50 dark:bg-gray-700 p-4 text-xs font-mono text-gray-700 dark:text-gray-200">
+              R_T = T * μ* - Σ_t r_t
+            </div>
+            <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+              表示されるリグレットは実測報酬ベースで算出しています。
+            </div>
+          </div>
+
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl p-6 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Key References</h3>
+            <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-blue-500"></span>
+                Auer et al. (2002) — UCB1
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-purple-500"></span>
+                Agrawal &amp; Goyal (2012) — Thompson Sampling
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500"></span>
+                Lattimore &amp; Szepesvári (2020) — Bandit Algorithms
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </main>
   );

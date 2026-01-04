@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { ArrowLeft, Filter, Activity, BarChart3, Target, Sparkles, ShieldCheck, Cpu, Radar, Layers } from 'lucide-react';
+import React, { useMemo, useState, useEffect } from 'react';
+import { ArrowLeft, Filter, Activity, BarChart3, Target, Sparkles, ShieldCheck, Cpu, Radar, Layers, Gauge, Sigma } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface ContextScenario {
@@ -75,18 +75,109 @@ const contextualModels = [
   },
 ];
 
+const actionCandidates = [
+  {
+    id: 'focus',
+    label: '集中型レコメンド',
+    base: 0.2,
+    weights: [0.6, 0.2, 0.1],
+  },
+  {
+    id: 'diversity',
+    label: '多様性重視フィード',
+    base: 0.15,
+    weights: [0.1, 0.5, 0.6],
+  },
+  {
+    id: 'deep-dive',
+    label: '深掘りリコメンド',
+    base: 0.25,
+    weights: [0.4, 0.4, 0.2],
+  },
+  {
+    id: 'explore',
+    label: '探索枠を強化',
+    base: 0.18,
+    weights: [0.2, 0.1, 0.7],
+  },
+];
+
+const modelCalibration = {
+  LinUCB: { exploration: 0.12, variance: 0.08 },
+  'Neural Bandit': { exploration: 0.08, variance: 0.12 },
+  'Hybrid Thompson': { exploration: 0.18, variance: 0.1 },
+};
+
 const ContextualSandboxPage: React.FC = () => {
   const [selectedScenario, setSelectedScenario] = useState<ContextScenario>(scenarios[0]);
   const [selectedModel, setSelectedModel] = useState(contextualModels[0].name);
+  const [featureAdjustments, setFeatureAdjustments] = useState<number[]>(
+    scenarios[0].features.map(() => 0)
+  );
 
-  const featureInsights = useMemo(() => {
-    return selectedScenario.features.map(feature => ({
-      ...feature,
-      explanation: `${feature.label} が高いほど ${selectedScenario.recommendation} が選ばれやすい傾向`,
-    }));
+  useEffect(() => {
+    setFeatureAdjustments(selectedScenario.features.map(() => 0));
   }, [selectedScenario]);
 
+  const adjustedFeatures = useMemo(() => {
+    return selectedScenario.features.map((feature, index) => {
+      const adjustedValue = Math.max(0, Math.min(100, feature.value + featureAdjustments[index]));
+      return {
+        ...feature,
+        adjustedValue,
+      };
+    });
+  }, [selectedScenario, featureAdjustments]);
+
+  const featureInsights = useMemo(() => {
+    return adjustedFeatures.map(feature => ({
+      ...feature,
+      explanation: `${feature.label} が高いほど推奨順位が上がる傾向`,
+    }));
+  }, [adjustedFeatures]);
+
   const modelSummary = useMemo(() => contextualModels.find(model => model.name === selectedModel), [selectedModel]);
+
+  const featureVector = useMemo(() => adjustedFeatures.map(feature => feature.adjustedValue / 100), [adjustedFeatures]);
+
+  const policyRanking = useMemo(() => {
+    const scored = actionCandidates.map(candidate => {
+      const signal = candidate.weights.reduce((sum, weight, index) => sum + weight * (featureVector[index] ?? 0), 0);
+      const score = candidate.base + signal;
+      return { ...candidate, score };
+    });
+    const maxScore = Math.max(...scored.map(item => item.score));
+    const expScores = scored.map(item => Math.exp((item.score - maxScore) * 2));
+    const total = expScores.reduce((sum, value) => sum + value, 0) || 1;
+    return scored
+      .map((item, index) => ({
+        ...item,
+        probability: expScores[index] / total,
+        expectedReward: Math.min(0.9, 0.2 + item.score * 0.6),
+      }))
+      .sort((a, b) => b.expectedReward - a.expectedReward);
+  }, [featureVector]);
+
+  const evaluationMetrics = useMemo(() => {
+    const calibration = modelCalibration[selectedModel as keyof typeof modelCalibration] ?? modelCalibration.LinUCB;
+    const averageSignal = featureVector.reduce((sum, value) => sum + value, 0) / Math.max(1, featureVector.length);
+    const expectedReward = 0.18 + averageSignal * 0.6;
+    const ips = expectedReward * (1 - calibration.exploration * 0.35);
+    const snips = ips * (1 - 0.03);
+    const dr = (ips + expectedReward) / 2 + (0.02 - calibration.variance * 0.05);
+    const ess = Math.round(1400 * (1 - calibration.exploration * 0.3));
+    const ci = calibration.variance * 0.22;
+    return {
+      expectedReward,
+      ips,
+      snips,
+      dr,
+      ess,
+      ci,
+    };
+  }, [featureVector, selectedModel]);
+
+  const topPolicy = policyRanking[0];
 
   return (
     <main className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
@@ -143,7 +234,7 @@ const ContextualSandboxPage: React.FC = () => {
           ))}
         </section>
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -157,29 +248,91 @@ const ContextualSandboxPage: React.FC = () => {
                 <div key={feature.label}>
                   <div className="flex items-center justify-between text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     <span>{feature.label}</span>
-                    <span>{feature.value}%</span>
+                    <span>{feature.adjustedValue}%</span>
                   </div>
                   <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div
                       className={`h-full bg-gradient-to-r ${feature.color}`}
-                      style={{ width: `${feature.value}%` }}
+                      style={{ width: `${feature.adjustedValue}%` }}
                     ></div>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{feature.explanation}</p>
                 </div>
               ))}
             </div>
+
+            <div className="mt-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-widest">
+                  Perturbation Controls
+                </h3>
+                <button
+                  onClick={() => setFeatureAdjustments(selectedScenario.features.map(() => 0))}
+                  className="text-xs font-semibold text-blue-600 dark:text-blue-300 hover:underline"
+                >
+                  Reset
+                </button>
+              </div>
+              <div className="space-y-4">
+                {selectedScenario.features.map((feature, index) => {
+                  const adjustedValue = adjustedFeatures[index]?.adjustedValue ?? feature.value;
+                  const delta = adjustedValue - feature.value;
+                  return (
+                    <div key={feature.label} className="space-y-2">
+                      <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
+                        <span>{feature.label}</span>
+                        <span>
+                          {adjustedValue}% <span className="text-gray-400">({delta >= 0 ? '+' : ''}{delta})</span>
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={adjustedValue}
+                        onChange={(event) => {
+                          const nextValue = Number(event.target.value);
+                          setFeatureAdjustments(prev => prev.map((current, idx) => (
+                            idx === index ? nextValue - feature.value : current
+                          )));
+                        }}
+                        className="w-full accent-blue-500"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50 space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedScenario.recommendation}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{topPolicy?.label}</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Bandit policy output</p>
               </div>
               <span className="px-4 py-1 rounded-full text-sm font-semibold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-200">
-                {selectedScenario.uplift}
+                +{((topPolicy?.expectedReward ?? 0) * 100).toFixed(1)}% CTR
               </span>
+            </div>
+            <div className="space-y-3">
+              {policyRanking.slice(0, 3).map(candidate => (
+                <div key={candidate.id} className="rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+                  <div className="flex items-center justify-between text-sm font-semibold text-gray-700 dark:text-gray-200">
+                    <span>{candidate.label}</span>
+                    <span>{(candidate.expectedReward * 100).toFixed(1)}%</span>
+                  </div>
+                  <div className="mt-2 w-full h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                      style={{ width: `${Math.min(100, candidate.probability * 100)}%` }}
+                    ></div>
+                  </div>
+                  <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    Policy weight {(candidate.probability * 100).toFixed(1)}%
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {contextualModels.map(model => (
@@ -204,14 +357,63 @@ const ContextualSandboxPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-300">
               <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Exploration rate</div>
-                <div className="text-2xl font-semibold text-gray-900 dark:text-white">0.18</div>
-                <p className="text-xs mt-1">High-context scenariosほど探索を抑制</p>
+                <div className="text-2xl font-semibold text-gray-900 dark:text-white">{modelCalibration[selectedModel as keyof typeof modelCalibration]?.exploration.toFixed(2) ?? '0.10'}</div>
+                <p className="text-xs mt-1">モデルごとに探索率が変化</p>
               </div>
               <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Latency</div>
                 <div className="text-2xl font-semibold text-gray-900 dark:text-white">32 ms</div>
                 <p className="text-xs mt-1">サーバーサイド推論 + キャッシュ</p>
               </div>
+            </div>
+          </div>
+
+          <div className="bg-white/90 dark:bg-gray-800/90 rounded-2xl p-8 shadow-xl border border-gray-200/50 dark:border-gray-700/50 space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Counterfactual Evaluation</h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">IPS / SNIPS / Doubly Robust</p>
+              </div>
+              <Gauge className="h-8 w-8 text-emerald-500" />
+            </div>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200/70 dark:border-emerald-700/40">
+                <div className="text-xs uppercase tracking-widest text-emerald-700 dark:text-emerald-300 mb-2">IPS</div>
+                <div className="text-2xl font-semibold text-emerald-800 dark:text-emerald-100">
+                  {evaluationMetrics.ips.toFixed(3)}
+                </div>
+                <div className="text-xs text-emerald-700/70 dark:text-emerald-200/70">±{evaluationMetrics.ci.toFixed(3)}</div>
+              </div>
+              <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200/70 dark:border-blue-700/40">
+                <div className="text-xs uppercase tracking-widest text-blue-700 dark:text-blue-300 mb-2">SNIPS</div>
+                <div className="text-2xl font-semibold text-blue-800 dark:text-blue-100">
+                  {evaluationMetrics.snips.toFixed(3)}
+                </div>
+                <div className="text-xs text-blue-700/70 dark:text-blue-200/70">ESS {evaluationMetrics.ess}</div>
+              </div>
+              <div className="p-4 rounded-xl bg-purple-50 dark:bg-purple-900/20 border border-purple-200/70 dark:border-purple-700/40">
+                <div className="text-xs uppercase tracking-widest text-purple-700 dark:text-purple-300 mb-2">Doubly Robust</div>
+                <div className="text-2xl font-semibold text-purple-800 dark:text-purple-100">
+                  {evaluationMetrics.dr.toFixed(3)}
+                </div>
+                <div className="text-xs text-purple-700/70 dark:text-purple-200/70">bias corrected</div>
+              </div>
+              <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                <div className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Expected Reward</div>
+                <div className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  {evaluationMetrics.expectedReward.toFixed(3)}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">model-based estimate</div>
+              </div>
+            </div>
+            <div className="rounded-xl bg-gray-50 dark:bg-gray-700 p-4 text-xs font-mono text-gray-700 dark:text-gray-200">
+              w_i = 1 / p(a_i | x_i) <br />
+              IPS = (1/N) sum w_i r_i <br />
+              DR = IPS + (μ̂(x_i) - w_i μ̂(a_i, x_i))
+            </div>
+            <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+              <Sigma className="h-4 w-4" />
+              Offline replay on {selectedScenario.segment}
             </div>
           </div>
         </section>
